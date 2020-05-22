@@ -1,3 +1,7 @@
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore_global
+    autocrlf = input
 
 [color]
     diff = auto
@@ -7,10 +11,5 @@
     ui = true
     pager = true
 
-[core]
-    editor = vim
-    excludesfile = ~/.gitignore_global
-    autocrlf = input
-#[user]
-#	name = Ivan Giacomelli
-#	email = ivan@nopsled.it
+[include]
+    path = .gitconfig.local
