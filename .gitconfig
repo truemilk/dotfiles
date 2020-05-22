@@ -11,6 +11,6 @@
     editor = vim
     excludesfile = ~/.gitignore_global
     autocrlf = input
-[user]
-	name = Ivan Giacomelli
-	email = ivan@nopsled.it
+#[user]
+#	name = Ivan Giacomelli
+#	email = ivan@nopsled.it
