@@ -1,7 +1,6 @@
 [user]
     name = Ivan Giacomelli
     email = ivan@nopsled.it
-    # signingkey = DCC7E11CDE5ACD106145498B4A7EA765E0FEAD0A
 
 [color]
     diff = auto
