@@ -37,7 +37,7 @@ set showmatch       " highlight matching [{()}]
 set incsearch       " search as characters are entered
 set hlsearch        " highlight matches
 
-"set cursorline
+set cursorline
 "set cursorcolumn
 
 set autoindent
@@ -63,8 +63,9 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'djoshea/vim-autoread'
+Plug 'farmergreg/vim-lastplace'
 call plug#end()
 
 let g:airline#extensions#tabline#enabled = 1
@@ -83,12 +84,17 @@ if has("gui_running")
     set guioptions=
     set background=light
     colorscheme PaperColor
-    let g:airline_theme='sol'
 else
     set background=dark
     colorscheme PaperColor
-    let g:airline_theme='sol'
-    let g:airline_powerline_fonts = 1
 endif
 
+"splits
+
 set splitbelow splitright
+
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
