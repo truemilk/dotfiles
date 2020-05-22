@@ -2,6 +2,7 @@
     editor = vim
     excludesfile = ~/.gitignore_global
     autocrlf = input
+    pager = less -FMRiX
 
 [color]
     diff = auto
@@ -10,6 +11,15 @@
     interactive = auto
     ui = true
     pager = true
+
+[color "diff"]
+    whitespace = red reverse
+
+[push]
+    default = simple
+
+[alias]
+    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)%an <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
 
 [include]
     path = .gitconfig.local
