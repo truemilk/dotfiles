@@ -63,7 +63,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
 call plug#end()
@@ -80,13 +81,12 @@ set mouse=a
 set clipboard=unnamed
 
 if has("gui_running")
-    set guifont=FiraCode-Retina:h15
     set guioptions=
-    set background=light
-    colorscheme PaperColor
 else
     set background=dark
-    colorscheme PaperColor
+    colorscheme gruvbox
+    let g:airline_theme='gruvbox'
+    let g:airline_powerline_fonts = 1
 endif
 
 "splits
