@@ -67,6 +67,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 let g:airline#extensions#tabline#enabled = 1

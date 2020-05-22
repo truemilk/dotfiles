@@ -33,7 +33,9 @@ export CLICOLOR=1
 alias ll="ls -l"
 alias la="ls -A"
 alias dh='dirs -v'
+
 alias gacp='git add . && git commit -m "gacp!" && git push'
+alias vupdate="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 
 tm() {
     if (( $# == 0 )); then
