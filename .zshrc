@@ -77,8 +77,9 @@ else
 fi
 alias e="$EDITOR"
 
-# zplug - Manually installed
-export ZPLUG_HOME=~/.zplug
+# zplug
+export ZPLUG_HOME=/usr/local/opt/zplug
+#export ZPLUG_HOME=~/.zplug
 if [ -d $ZPLUG_HOME ]; then
     source $ZPLUG_HOME/init.zsh
     zplug "djui/alias-tips"
