@@ -27,7 +27,7 @@ setopt HIST_BEEP
 
 # lscolors
 export CLICOLOR=1
-export LSCOLORS=gxfxcxdxbxegedabagacad
+#export LSCOLORS=gxfxcxdxbxegedabagacad
 
 # aliases
 alias ll="ls -l"
