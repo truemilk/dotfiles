@@ -1,0 +1,47 @@
+# General
+**/.DS_Store
+**/.AppleDouble
+**/.LSOverride
+
+# Thumbnails
+**/._*
+
+# Files that might appear in the root of a volume
+**/.DocumentRevisions-V100
+**/.fseventsd
+**/.Spotlight-V100
+**/.TemporaryItems
+**/.Trashes
+**/.VolumeIcon.icns
+**/.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+**/.AppleDB
+**/.AppleDesktop
+**/Network Trash Folder
+**/Temporary Items
+**/.apdisk
+
+# Sublime Text
+**/*.sublime-workspace
+**/*.sublime-project
+
+# vscode
+**/.vscode
+**/*.code-workspace
+
+# jetbrains
+**/.idea
+
+# python stuff
+**/venv
+**/.venv
+**/__pycache__
+**/.pytest_cache
+
+# jenv and pyenv
+**/.python-version
+**/.java-version
+
+# projectile (emacs)
+**/.projectile
