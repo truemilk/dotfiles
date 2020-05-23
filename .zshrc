@@ -28,6 +28,8 @@ setopt HIST_BEEP
 # lscolors
 export CLICOLOR=1
 #export LSCOLORS=gxfxcxdxbxegedabagacad
+export LSCOLORS=GxFxcxdxbxegedabagacad
+
 
 # aliases
 alias ll="ls -l"
@@ -35,7 +37,16 @@ alias la="ls -A"
 alias dh='dirs -v'
 
 alias gacp='git add . && git commit -m "gacp!" && git push'
-alias vupdate="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
+
+alias uv="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
+alias ub="brew update && brew upgrade && brew cleanup && brew cask upgrade"
+alias uz="zplug update && source ~/.zshrc"
+
+alias zshrc="e ~/.zshrc && source ~/.zshrc"
+
+alias dotfiles pull="yadm pull"
+alias dotfiles diff="yadm diff"
+alias dotfiles push="yadm add -u && yadm commit -m 'yadm!' && yadm push"
 
 tm() {
     if (( $# == 0 )); then
@@ -72,7 +83,7 @@ bindkey "^X^E" edit-command-line
 
 # Check if nvim is present and set it as a default editor, if not, set vim
 # Create an alias 'e' that launches the default editor
-if which vim > /dev/null; then
+if which nvim > /dev/null; then
     export EDITOR="nvim"
 else
     export EDITOR="vim"
@@ -84,9 +95,8 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 #export ZPLUG_HOME=~/.zplug
 if [ -d $ZPLUG_HOME ]; then
     source $ZPLUG_HOME/init.zsh
-    zplug "djui/alias-tips"
     zplug "zsh-users/zsh-autosuggestions"
-    zplug romkatv/powerlevel10k, as:theme, depth:1
+    zplug "romkatv/powerlevel10k", as:theme, depth:1
     if ! zplug check --verbose; then
         printf "Install? [y/N]: "
         if read -q; then
