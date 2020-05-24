@@ -55,15 +55,6 @@ let mapleader = " "
 
 set autowrite
 
-nnoremap <up>    <nop>
-nnoremap <down>  <nop>
-nnoremap <left>  <nop>
-nnoremap <right> <nop>
-inoremap <up>    <nop>
-inoremap <down>  <nop>
-inoremap <left>  <nop>
-inoremap <right> <nop>
-
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -71,9 +62,8 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/landscape.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
 Plug 'terryma/vim-multiple-cursors'
@@ -90,9 +80,7 @@ if has("gui_running")
     set guioptions=
 else
     set background=dark
-    colorscheme gruvbox
-    let g:airline_theme='gruvbox'
-    let g:airline_powerline_fonts = 1
+    colorscheme landscape
 endif
 
 set splitbelow splitright
