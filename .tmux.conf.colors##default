@@ -1,2 +1,2 @@
-set -g status-style bg='#248f24',fg='#000000'
-set-window-option -g window-status-current-style fg='#000000',bg='#2eb82e'
+set -g status-style fg=black,bg=green
+set-window-option -g window-status-current-style fg=black,bg=white
