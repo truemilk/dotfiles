@@ -51,11 +51,18 @@ set expandtab
 set number
 set relativenumber
 
-"set colorcolumn=80,100,120
-
 let mapleader = " "
 
 set autowrite
+
+nnoremap <up>    <nop>
+nnoremap <down>  <nop>
+nnoremap <left>  <nop>
+nnoremap <right> <nop>
+inoremap <up>    <nop>
+inoremap <down>  <nop>
+inoremap <left>  <nop>
+inoremap <right> <nop>
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -64,21 +71,14 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'machakann/vim-highlightedyank'
 call plug#end()
-
-let g:lightline = {
-  \     'active': {
-  \         'left': [['mode', 'paste' ], ['readonly', 'filename', 'modified']],
-  \         'right': [['lineinfo'], ['percent'], ['fileformat', 'fileencoding']]
-  \     }
-  \ }
 
 set laststatus=2
 set noshowmode
@@ -91,9 +91,9 @@ if has("gui_running")
 else
     set background=dark
     colorscheme gruvbox
+    let g:airline_theme='gruvbox'
+    let g:airline_powerline_fonts = 1
 endif
-
-"splits
 
 set splitbelow splitright
 

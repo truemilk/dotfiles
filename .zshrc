@@ -83,10 +83,10 @@ bindkey "^X^E" edit-command-line
 
 # Check if nvim is present and set it as a default editor, if not, set vim
 # Create an alias 'e' that launches the default editor
-if which nvim > /dev/null; then
-    export EDITOR="nvim"
-else
+if which vim > /dev/null; then
     export EDITOR="vim"
+else
+    export EDITOR="vi"
 fi
 alias e="$EDITOR"
 
