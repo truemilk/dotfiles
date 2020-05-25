@@ -66,7 +66,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'fatih/molokai'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
@@ -76,7 +76,6 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'morhetz/gruvbox'
 call plug#end()
 
 set laststatus=2
@@ -158,7 +157,4 @@ set background=dark
 "highlight VertSplit ctermfg=black ctermbg=235 term=NONE
 "highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
 "highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
-"let g:rehash256 = 1
-"let g:molokai_original = 1
-"colorscheme molokai
 colorscheme gruvbox

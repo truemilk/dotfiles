@@ -88,7 +88,7 @@ if which vim > /dev/null; then
 else
     export EDITOR="vi"
 fi
-alias e="$EDITOR"
+alias v="$EDITOR"
 
 # zplug
 export ZPLUG_HOME=/usr/local/opt/zplug
