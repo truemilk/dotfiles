@@ -1,3 +1,7 @@
+set nocompatible
+
+set viminfo+='1000,n~/.vim/viminfo
+
 if isdirectory($HOME . '/.vim/backup') == 0
   :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
 endif
@@ -24,12 +28,10 @@ if exists("+undofile")
   set undodir+=~/.vim/undo//
   set undofile
 endif
-
-set viminfo+=n~/.vim/viminfo
+    
+set encoding=utf8
 
 set backspace=indent,eol,start
-
-set nocompatible
 
 syntax on           " enable syntax processing
 set wildmenu        " visual autocomplete for command menu
@@ -37,8 +39,6 @@ set showmatch       " highlight matching [{()}]
 set incsearch       " search as characters are entered
 set hlsearch        " highlight matches
 
-set cursorline
-"set cursorcolumn
 
 set autoindent
 filetype plugin indent on
@@ -49,7 +49,7 @@ set shiftwidth=4
 set expandtab
 
 set number
-"set relativenumber
+set relativenumber
 
 let mapleader = " "
 
@@ -62,7 +62,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
@@ -76,16 +75,23 @@ set noshowmode
 set mouse=a
 set clipboard=unnamed
 
-if has("gui_running")
-    set guioptions=
-else
-    set background=dark
-    colorscheme gruvbox
-endif
-
 set splitbelow splitright
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+set cursorline
+augroup CursorLineOnlyInActiveWindow
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  autocmd WinLeave * setlocal nocursorline
+augroup END
+
+set background=dark
+colorscheme industry
+highlight LineNr ctermfg=238
+highlight VertSplit ctermfg=black ctermbg=238 term=NONE
+highlight CursorLine cterm=NONE ctermbg=238 ctermfg=white
+highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
