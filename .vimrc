@@ -49,7 +49,7 @@ set shiftwidth=4
 set expandtab
 
 set number
-set relativenumber
+"set relativenumber
 
 let mapleader = " "
 
@@ -62,7 +62,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'itchyny/landscape.vim'
+Plug 'morhetz/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
@@ -80,7 +80,7 @@ if has("gui_running")
     set guioptions=
 else
     set background=dark
-    colorscheme landscape
+    colorscheme gruvbox
 endif
 
 set splitbelow splitright
