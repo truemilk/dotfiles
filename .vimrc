@@ -31,6 +31,8 @@ endif
     
 set encoding=utf8
 
+set updatetime=100
+
 set backspace=indent,eol,start
 
 syntax on           " enable syntax processing
@@ -48,10 +50,12 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+
 set number
 set relativenumber
 
-let mapleader = " "
+let mapleader = ","
 
 set autowrite
 
@@ -62,11 +66,17 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'fatih/molokai'
 Plug 'itchyny/lightline.vim'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'machakann/vim-highlightedyank'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'SirVer/ultisnips'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 set laststatus=2
@@ -82,6 +92,59 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" Golang
+
+map <leader>n :cnext<CR>
+map <leader>m :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
+"autocmd FileType go nmap <leader>b  <Plug>(go-build)
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+   if l:file =~# '^\f\+_test\.go$'
+     call go#test#Test(0, 1)
+   elseif l:file =~# '^\f\+\.go$'
+     call go#cmd#Build(0)
+   endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+let g:go_list_type = "quickfix"
+
+let g:go_test_timeout = '10s'
+
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+
+let g:go_fmt_command = "goimports"
+
+let g:go_textobj_include_function_doc = 1
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+"autocmd FileType go nmap <Leader>i <Plug>(go-info)
+let g:go_auto_type_info = 1
+
+let g:go_auto_sameids = 1
+
+" Colors and customizations
+
 set cursorline
 augroup CursorLineOnlyInActiveWindow
   autocmd!
@@ -90,8 +153,12 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 
 set background=dark
-colorscheme industry
-highlight LineNr ctermfg=240
-highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
-highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+"colorscheme industry
+"highlight LineNr ctermfg=240
+"highlight VertSplit ctermfg=black ctermbg=235 term=NONE
+"highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
+"highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+"let g:rehash256 = 1
+"let g:molokai_original = 1
+"colorscheme molokai
+colorscheme gruvbox
