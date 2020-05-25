@@ -91,7 +91,7 @@ augroup END
 
 set background=dark
 colorscheme industry
-highlight LineNr ctermfg=238
-highlight VertSplit ctermfg=black ctermbg=238 term=NONE
-highlight CursorLine cterm=NONE ctermbg=238 ctermfg=white
+highlight LineNr ctermfg=240
+highlight VertSplit ctermfg=black ctermbg=235 term=NONE
+highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
 highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
