@@ -72,7 +72,9 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 set laststatus=2
@@ -87,6 +89,9 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+" Make double-<Esc> clear search highlights
+nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 " Golang
 
@@ -115,6 +120,7 @@ let g:go_auto_sameids = 1
 
 autocmd FileType go nmap <leader>r  <Plug>(go-run)
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+
 function! s:build_go_files()
   let l:file = expand('%')
    if l:file =~# '^\f\+_test\.go$'
@@ -123,11 +129,15 @@ function! s:build_go_files()
      call go#cmd#Build(0)
    endif
 endfunction
+
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd Filetype go command! -bang AE call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+" Always enable preview window on the right with 60% width
+let g:fzf_preview_window = 'right:60%'
 
 " Colors and customizations
 
