@@ -1,2 +1,0 @@
-set-window-option -g status-right ""
-#set-window-option -g status-right "#[bg=red, fg=white, bold] #H "
