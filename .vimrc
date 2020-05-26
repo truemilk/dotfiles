@@ -75,6 +75,7 @@ Plug 'SirVer/ultisnips'
 "Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 set laststatus=2
