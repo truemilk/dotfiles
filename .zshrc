@@ -61,9 +61,9 @@ alias gacp='git add . && git commit -m "gacp!" && git push'
 
 alias uv="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias ub="brew update && brew upgrade && brew cleanup && brew cask upgrade"
-alias uz="zplug update && source ~/.zshrc"
+alias uz="zplug update && echo '\nReloading zsh...' && source ~/.zshrc"
 
-alias zshrc="v ~/.zshrc && source ~/.zshrc"
+alias zshrc="v ~/.zshrc && echo '\nReloading zsh...\n'  && source ~/.zshrc"
 
 tm() {
     if (( $# != 1 )); then
