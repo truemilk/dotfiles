@@ -46,13 +46,6 @@ zstyle ':completion:*' rehash true
 # completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-if which vim > /dev/null; then
-    export EDITOR="vim"
-else
-    export EDITOR="vi"
-fi
-alias v="$EDITOR"
-
 # lscolors
 export CLICOLOR=1
 export LSCOLORS=GxFxcxdxbxegedabagacad

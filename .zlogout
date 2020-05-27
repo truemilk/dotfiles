@@ -1,1 +1,2 @@
-[[ $- != *i* ]] && reset
+#[[ $- != *i* ]] && reset
+echo "Bye!"
