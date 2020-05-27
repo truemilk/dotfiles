@@ -59,6 +59,11 @@ noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 
+noremap! <Up> <Nop>
+noremap! <Down> <Nop>
+noremap! <Left> <Nop>
+noremap! <Right> <Nop>
+
 set autowrite
 
 if empty(glob('~/.vim/autoload/plug.vim'))
