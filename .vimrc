@@ -52,7 +52,7 @@ set expandtab
 set number
 set relativenumber
 
-let mapleader = ","
+let mapleader = ";"
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
