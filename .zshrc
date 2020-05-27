@@ -25,6 +25,34 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_VERIFY
 setopt HIST_BEEP
 
+# compinit
+autoload -Uz compinit
+if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
+  compinit
+else
+  compinit -C
+fi
+
+# dirs
+DIRSTACKSIZE=10
+setopt autopushd pushdminus pushdsilent pushdtohome
+
+# completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Persistent rehash - https://wiki.archlinux.org/index.php/zsh#Persistent_rehash
+zstyle ':completion:*' rehash true
+
+# completions
+fpath=(/usr/local/share/zsh-completions $fpath)
+
+if which vim > /dev/null; then
+    export EDITOR="vim"
+else
+    export EDITOR="vi"
+fi
+alias v="$EDITOR"
+
 # lscolors
 export CLICOLOR=1
 export LSCOLORS=GxFxcxdxbxegedabagacad
@@ -50,43 +78,12 @@ tm() {
     fi
 }
 
-# compinit
-autoload -Uz compinit
-if [ $(date +'%j') != $(stat -f '%Sm' -t '%j' ~/.zcompdump) ]; then
-  compinit
-else
-  compinit -C
-fi
-
-# dirs
-DIRSTACKSIZE=10
-setopt autopushd pushdminus pushdsilent pushdtohome
-
-# completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-# Persistent rehash - https://wiki.archlinux.org/index.php/zsh#Persistent_rehash
-zstyle ':completion:*' rehash true
-
-# completions
-fpath=(/usr/local/share/zsh-completions $fpath)
-
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-# Check if nvim is present and set it as a default editor, if not, set vim
-# Create an alias 'e' that launches the default editor
-if which vim > /dev/null; then
-    export EDITOR="vim"
-else
-    export EDITOR="vi"
-fi
-alias v="$EDITOR"
-
 # zplug
 export ZPLUG_HOME=/usr/local/opt/zplug
-#export ZPLUG_HOME=~/.zplug
 if [ -d $ZPLUG_HOME ]; then
     source $ZPLUG_HOME/init.zsh
     zplug "zsh-users/zsh-autosuggestions"
