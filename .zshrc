@@ -61,6 +61,11 @@ alias ll="ls -l"
 alias la="ls -A"
 alias dh='dirs -v'
 
+alias -g G="| rg"
+alias -g L="| less"
+alias -g F="| fzf"
+alias -g C="| pbcopy"
+
 alias v="$EDITOR"
 
 alias gacp='git add . && git commit -m "gacp!" && git push'
@@ -143,9 +148,14 @@ fi
 # fzf
 if which fzf > /dev/null; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --border --inline-info'
+    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info'
     export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
     export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+    if which fd > /dev/null; then
+        export FZF_DEFAULT_COMMAND="fd . $HOME"
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+        export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+    fi
 fi
 
 # extras

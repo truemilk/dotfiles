@@ -1,10 +1,6 @@
 "set nocompatible
 
-if has('nvim')
-    set viminfo+='1000,n~/.vim/viminfo/viminfo.shada
-else
-    set viminfo+='1000,n~/.vim/viminfo/viminfo
-endif
+set viminfo+='1000,n~/.vim/viminfo
 
 if isdirectory($HOME . '/.vim/backup') == 0
   :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
@@ -77,7 +73,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
@@ -86,10 +82,8 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'SirVer/ultisnips'
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'airblade/vim-gitgutter'
 call plug#end()
 
@@ -165,9 +159,15 @@ augroup CursorLineOnlyInActiveWindow
 augroup END
 
 set background=dark
+
 "colorscheme industry
 "highlight LineNr ctermfg=240
 "highlight VertSplit ctermfg=black ctermbg=235 term=NONE
 "highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
 "highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
-colorscheme gruvbox
+
+colorscheme onedark
+
+let g:lightline = {
+  \ 'colorscheme': 'onedark',
+  \ }
