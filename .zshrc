@@ -55,6 +55,8 @@ alias ll="ls -l"
 alias la="ls -A"
 alias dh='dirs -v'
 
+alias v="$EDITOR"
+
 alias gacp='git add . && git commit -m "gacp!" && git push'
 
 alias uv="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"

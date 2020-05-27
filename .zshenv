@@ -3,5 +3,3 @@ if which vim > /dev/null; then
 else
     export EDITOR="vi"
 fi
-
-alias v="$EDITOR"
