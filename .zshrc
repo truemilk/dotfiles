@@ -50,6 +50,12 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 export CLICOLOR=1
 export LSCOLORS=GxFxcxdxbxegedabagacad
 
+if which vim > /dev/null; then
+    export EDITOR="vim"
+else
+    export EDITOR="vi"
+fi
+
 # aliases
 alias ll="ls -l"
 alias la="ls -A"
