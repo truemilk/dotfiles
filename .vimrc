@@ -1,4 +1,4 @@
-set nocompatible
+"set nocompatible
 
 set viminfo+='1000,n~/.vim/viminfo
 
