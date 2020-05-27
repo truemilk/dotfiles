@@ -27,9 +27,7 @@ setopt HIST_BEEP
 
 # lscolors
 export CLICOLOR=1
-#export LSCOLORS=gxfxcxdxbxegedabagacad
 export LSCOLORS=GxFxcxdxbxegedabagacad
-
 
 # aliases
 alias ll="ls -l"
@@ -42,14 +40,10 @@ alias uv="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias ub="brew update && brew upgrade && brew cleanup && brew cask upgrade"
 alias uz="zplug update && source ~/.zshrc"
 
-alias zshrc="e ~/.zshrc && source ~/.zshrc"
-
-alias dotfiles pull="yadm pull"
-alias dotfiles diff="yadm diff"
-alias dotfiles push="yadm add -u && yadm commit -m 'yadm!' && yadm push"
+alias zshrc="v ~/.zshrc && source ~/.zshrc"
 
 tm() {
-    if (( $# == 0 )); then
+    if (( $# != 1 )); then
         tmux list-sessions
     else
         tmux new-session -A -s $1
@@ -149,7 +143,7 @@ fi
 
 # fzf
 if which fzf > /dev/null; then
-    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
+    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 fi
 
 # extras
@@ -164,4 +158,5 @@ if [ -d $HOME/bin ]; then
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
