@@ -1,6 +1,10 @@
 "set nocompatible
 
-set viminfo+='1000,n~/.vim/viminfo
+if has('nvim')
+    set viminfo+='1000,n~/.vim/viminfo/viminfo.shada
+else
+    set viminfo+='1000,n~/.vim/viminfo/viminfo
+endif
 
 if isdirectory($HOME . '/.vim/backup') == 0
   :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
@@ -86,6 +90,7 @@ Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 set laststatus=2
