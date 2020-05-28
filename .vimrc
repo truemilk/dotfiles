@@ -183,8 +183,7 @@ map <leader>ll :Lines<CR>
 " Always enable preview window on the right with 60% width
 let g:fzf_preview_window = 'right:60%'
 
-let g:vimwiki_list = [{'path': '~/vimwiki/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 " Colors and customizations
 
