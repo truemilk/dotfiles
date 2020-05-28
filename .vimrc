@@ -134,10 +134,6 @@ nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 
-map <leader>n :cnext<CR>
-map <leader>m :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
-
 let g:go_list_type = "quickfix"
 let g:go_test_timeout = '10s'
 let g:go_fmt_command = "goimports"
@@ -155,9 +151,6 @@ let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
 let g:go_auto_type_info = 1
 let g:go_auto_sameids = 1
 
-autocmd FileType go nmap <leader>r  <Plug>(go-run)
-autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-
 function! s:build_go_files()
   let l:file = expand('%')
    if l:file =~# '^\f\+_test\.go$'
@@ -167,12 +160,22 @@ function! s:build_go_files()
    endif
 endfunction
 
+" Mappings
+
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd Filetype go command! -bang AE call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
+map <leader>n :cnext<CR>
+map <leader>m :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
+map <C-p> :GFiles<CR>
 " Always enable preview window on the right with 60% width
 let g:fzf_preview_window = 'right:60%'
 
