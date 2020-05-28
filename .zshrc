@@ -53,7 +53,7 @@ export LSCOLORS=GxFxcxdxbxegedabagacad
 if which vim > /dev/null; then
     export EDITOR="vim"
 else
-    export EDITOR="vi"
+    export EDITOR="nano"
 fi
 
 # aliases
@@ -61,6 +61,7 @@ alias ll="ls -l"
 alias la="ls -A"
 alias dh='dirs -v'
 
+alias -g A="| awk"
 alias -g G="| rg"
 alias -g L="| less"
 alias -g F="| fzf"
