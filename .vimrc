@@ -67,7 +67,7 @@ set expandtab
 set number
 set relativenumber
 
-let mapleader = ";"
+let mapleader = " "
 
 noremap <Up> <Nop>
 noremap <Down> <Nop>
@@ -112,6 +112,7 @@ Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
+Plug 'vimwiki/vimwiki'
 call plug#end()
 
 set laststatus=2
@@ -178,6 +179,9 @@ nnoremap <leader>a :cclose<CR>
 map <C-p> :GFiles<CR>
 " Always enable preview window on the right with 60% width
 let g:fzf_preview_window = 'right:60%'
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " Colors and customizations
 
