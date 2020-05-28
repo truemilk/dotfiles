@@ -1,32 +1,47 @@
-"set nocompatible
+set nocompatible
 
-set viminfo+='1000,n~/.vim/viminfo
+set shortmess+=A
 
-if isdirectory($HOME . '/.vim/backup') == 0
-  :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
-endif
-set backupdir-=.
-set backupdir+=.
-set backupdir-=~/
-set backupdir^=~/.vim/backup/
-set backupdir^=./.vim-backup/
-set backup
-
-if isdirectory($HOME . '/.vim/swap') == 0
-  :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
-endif
-set directory=./.vim-swap//
-set directory+=~/.vim/swap//
-set directory+=~/tmp//
-set directory+=.
-
-if exists("+undofile")
-  if isdirectory($HOME . '/.vim/undo') == 0
-    :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-  endif
-  set undodir=./.vim-undo//
-  set undodir+=~/.vim/undo//
-  set undofile
+if exists('$SUDO_USER')         " don't create root-owned files
+    set noswapfile
+    set nobackup
+    set nowritebackup
+    set noundofile
+    set viminfo=
+else
+    if isdirectory($HOME . '/.vim/swap') == 0
+      :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+    endif
+    set directory=./.vim-swap//
+    set directory+=~/.vim/swap//
+    set directory+=~/tmp//
+    set directory+=.
+    if isdirectory($HOME . '/.vim/backup') == 0
+      :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+    endif
+    set backupdir-=.
+    set backupdir+=.
+    set backupdir-=~/
+    set backupdir^=~/.vim/backup/
+    set backupdir^=./.vim-backup/
+    set backup
+    if exists("+undofile")
+      if isdirectory($HOME . '/.vim/undo') == 0
+        :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+      endif
+      set undodir=./.vim-undo//
+      set undodir+=~/.vim/undo//
+      set undofile
+    endif
+    if isdirectory($HOME . '/.vim/view') == 0
+      :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+    endif
+    set viewdir=$HOME/.vim/view//
+    if has("nvim")          " avoid compatibility issues
+        set viminfo+=n$HOME/.vim/tmp/nviminfo
+    else
+        set viminfo+=n$HOME/.vim/tmp/viminfo
+    endif
 endif
     
 set encoding=utf8
@@ -64,7 +79,20 @@ noremap! <Down> <Nop>
 noremap! <Left> <Nop>
 noremap! <Right> <Nop>
 
-set autowrite
+set autoread
+set autowriteall
+
+augroup AutoSaveAndLoadWithFocus
+au!
+    au FocusGained,BufEnter * :silent! !
+    au FocusLost,WinLeave * :silent! w
+augroup end
+
+augroup remember_folds
+  autocmd!
+  autocmd BufWinLeave * mkview
+  autocmd BufWinEnter * silent! loadview
+augroup end
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -75,7 +103,6 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'joshdick/onedark.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'djoshea/vim-autoread'
 Plug 'farmergreg/vim-lastplace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'machakann/vim-highlightedyank'
@@ -166,8 +193,16 @@ set background=dark
 "highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
 "highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
 
-colorscheme onedark
+try
+  colorscheme onedark
+  catch
+endtry
 
-let g:lightline = {
-  \ 'colorscheme': 'onedark',
-  \ }
+"let g:lightline = {
+"  \ 'colorscheme': 'onedark',
+"  \ }
+
+"xnoremap <m-down> :m '>+1<CR>gv=gv
+"xnoremap <m-up> :m '<-2<CR>gv=gv
+"xnoremap <m-right> <Esc>`<<C-v>`>odp`<<C-v>`>lol
+"xnoremap <m-left> <Esc>`<<C-v>`>odhP`<<C-v>`>hoh
