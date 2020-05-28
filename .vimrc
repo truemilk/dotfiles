@@ -118,6 +118,8 @@ call plug#end()
 set laststatus=2
 set noshowmode
 
+set scrolloff=10
+
 set mouse=a
 set clipboard=unnamed
 
