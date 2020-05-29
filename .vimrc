@@ -191,3 +191,13 @@ try
 endtry
 
 "let g:lightline = { 'colorscheme': 'onedark', }
+
+if has("gui")
+    set guifont=Fira\ Code:h17
+    set guioptions-=m  "menu bar
+    set guioptions-=T  "toolbar
+    set guioptions-=r  "scrollbar
+    set background=light
+else
+    set background=dark
+endif
