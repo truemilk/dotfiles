@@ -62,8 +62,8 @@ alias la="ls -A"
 alias dh='dirs -v'
 
 alias -g A="| awk"
-alias -g G="| rg"
-alias -g R="| grep"
+alias -g R="| rg"
+alias -g G="| grep"
 alias -g L="| less"
 alias -g F="| fzf"
 alias -g C="| pbcopy"

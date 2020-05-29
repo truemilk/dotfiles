@@ -180,38 +180,14 @@ nnoremap <leader>a :cclose<CR>
 
 map <C-p> :GFiles<CR>
 map <leader>ll :Lines<CR>
-" Always enable preview window on the right with 60% width
-let g:fzf_preview_window = 'right:60%'
+
+let g:fzf_preview_window = 'right:50%'
 
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-
-" Colors and customizations
-
-set cursorline
-augroup CursorLineOnlyInActiveWindow
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
-augroup END
-
-set background=dark
-
-"colorscheme industry
-"highlight LineNr ctermfg=240
-"highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-"highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
-"highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
 
 try
   colorscheme onedark
   catch
 endtry
 
-"let g:lightline = {
-"  \ 'colorscheme': 'onedark',
-"  \ }
-
-"xnoremap <m-down> :m '>+1<CR>gv=gv
-"xnoremap <m-up> :m '<-2<CR>gv=gv
-"xnoremap <m-right> <Esc>`<<C-v>`>odp`<<C-v>`>lol
-"xnoremap <m-left> <Esc>`<<C-v>`>odhP`<<C-v>`>hoh
+"let g:lightline = { 'colorscheme': 'onedark', }
