@@ -97,7 +97,7 @@ if [ -d $HOME/.cargo ]; then
     export PATH=$HOME/.cargo/bin:$PATH
 fi
 
-# golang
+# golang - From Homebrew
 if [ -d $HOME/go ]; then
     export GOPATH=$HOME/go
     export GOROOT=/usr/local/opt/go/libexec
