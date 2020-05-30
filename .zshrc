@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 bindkey -e
 export KEYTIMEOUT=1
 
@@ -75,7 +68,6 @@ alias gacp='git add . && git commit -m "gacp!" && git push'
 
 alias uv="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias ub="brew update && brew upgrade && brew cleanup && brew cask upgrade"
-alias uz="zplug update && echo '\nReloading zsh...' && source ~/.zshrc"
 
 alias ze="v ~/.zshrc && echo '\nReloading zsh...\n' && source ~/.zshrc"
 alias zr="echo '\nReloading zsh...\n' && source ~/.zshrc"
@@ -94,23 +86,11 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-# zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
-if [ -d $ZPLUG_HOME ]; then
-    source $ZPLUG_HOME/init.zsh
-    zplug "zsh-users/zsh-autosuggestions"
-    zplug "romkatv/powerlevel10k", as:theme, depth:1
-    if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-    fi
-    zplug load
-    export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-    export ZSH_AUTOSUGGEST_USE_ASYNC=1
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#888888,bg=#222222"
-fi
+autoload -U colors && colors
+autoload -Uz vcs_info
+precmd () { vcs_info }
+setopt prompt_subst
+PS1='%{$fg[cyan]%}%(5~|%-1~/…/%3~|%4~)%{$reset_color%}${vcs_info_msg_0_} %{$fg[green]%}%%%{$reset_color%} '
 
 # rust - Manually installed
 if [ -d $HOME/.cargo ]; then
@@ -173,7 +153,3 @@ fi
 if [ -d $HOME/bin ]; then
     export PATH=$HOME/bin:$PATH
 fi
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

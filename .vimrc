@@ -106,13 +106,22 @@ Plug 'itchyny/lightline.vim'
 Plug 'farmergreg/vim-lastplace'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'machakann/vim-highlightedyank'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'SirVer/ultisnips'
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'AndrewRadev/splitjoin.vim'
+"Plug 'SirVer/ultisnips'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+let g:fzf_preview_window = 'right:50%'
 Plug 'airblade/vim-gitgutter'
 Plug 'vimwiki/vimwiki'
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'dense-analysis/ale'
+let g:ale_linters = {'rust': ['analyzer']}
+
+
 call plug#end()
 
 set laststatus=2
@@ -133,57 +142,55 @@ map <C-l> <C-W>l
 " Make double-<Esc> clear search highlights
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
+
 " Golang
 
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-
-let g:go_list_type = "quickfix"
-let g:go_test_timeout = '10s'
-let g:go_fmt_command = "goimports"
-let g:go_textobj_include_function_doc = 1
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_build_constraints = 1
-
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_auto_type_info = 1
-let g:go_auto_sameids = 1
-
-function! s:build_go_files()
-  let l:file = expand('%')
-   if l:file =~# '^\f\+_test\.go$'
-     call go#test#Test(0, 1)
-   elseif l:file =~# '^\f\+\.go$'
-     call go#cmd#Build(0)
-   endif
-endfunction
-
-" Mappings
-
-autocmd FileType go nmap <leader>r <Plug>(go-run)
-autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-
-autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-autocmd Filetype go command! -bang AE call go#alternate#Switch(<bang>0, 'edit')
-autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+""" autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+""" 
+""" let g:go_list_type = "quickfix"
+""" let g:go_test_timeout = '10s'
+""" let g:go_fmt_command = "goimports"
+""" let g:go_textobj_include_function_doc = 1
+""" 
+""" let g:go_highlight_types = 1
+""" let g:go_highlight_fields = 1
+""" let g:go_highlight_functions = 1
+""" let g:go_highlight_function_calls = 1
+""" let g:go_highlight_operators = 1
+""" let g:go_highlight_extra_types = 1
+""" let g:go_highlight_build_constraints = 1
+""" 
+""" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+""" let g:go_auto_type_info = 1
+""" let g:go_auto_sameids = 1
+""" 
+""" function! s:build_go_files()
+"""   let l:file = expand('%')
+"""    if l:file =~# '^\f\+_test\.go$'
+"""      call go#test#Test(0, 1)
+"""    elseif l:file =~# '^\f\+\.go$'
+"""      call go#cmd#Build(0)
+"""    endif
+""" endfunction
+""" 
+""" " Mappings
+""" 
+""" autocmd FileType go nmap <leader>r <Plug>(go-run)
+""" autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+""" 
+""" autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+""" autocmd Filetype go command! -bang AE call go#alternate#Switch(<bang>0, 'edit')
+""" autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+""" autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+""" autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
 map <leader>n :cnext<CR>
 map <leader>m :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
 map <C-p> :GFiles<CR>
-map <leader>ll :Lines<CR>
 
-let g:fzf_preview_window = 'right:50%'
 
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
 
 try
   colorscheme onedark
