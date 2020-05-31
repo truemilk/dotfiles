@@ -85,16 +85,13 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-autoload -U colors && colors
 autoload -Uz vcs_info
 precmd () { vcs_info }
 setopt prompt_subst
-PS1='%{$fg[cyan]%}%(5~|%-1~/…/%3~|%4~)%{$reset_color%}${vcs_info_msg_0_} %{$fg[green]%}%%%{$reset_color%} '
+PS1='%F{cyan}%(5~|%-1~/…/%3~|%4~)%f${vcs_info_msg_0_} %F{magenta}%%%f '
 
 # rust - Manually installed
-if [ -d $HOME/.cargo ]; then
-    export PATH=$HOME/.cargo/bin:$PATH
-fi
+[[ -d $HOME/.cargo ]] && export PATH=$HOME/.cargo/bin:$PATH
 
 # golang - From Homebrew
 if [ -d $HOME/go ]; then
@@ -115,9 +112,7 @@ if which pyenv > /dev/null; then
 fi
 
 # poetry - Manually installed
-if [ -d $HOME/.poetry ]; then
-    export PATH=$HOME/.poetry/bin:$PATH
-fi
+[[ -d $HOME/.poetry ]] && export PATH=$HOME/.poetry/bin:$PATH
 
 # pipenv - From Homebrew
 if which pipenv > /dev/null; then
@@ -150,6 +145,4 @@ if [ -d $HOME/.zextras ]; then
 fi
 
 # ~/bin 
-if [ -d $HOME/bin ]; then
-    export PATH=$HOME/bin:$PATH
-fi
+[[ -d $HOME/bin ]] && export PATH=$HOME/bin:$PATH

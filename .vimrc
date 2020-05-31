@@ -2,7 +2,7 @@ set nocompatible
 
 set shortmess+=A
 
-if exists('$SUDO_USER')         " don't create root-owned files
+if exists('$SUDO_USER')
     set noswapfile
     set nobackup
     set nowritebackup
@@ -37,7 +37,7 @@ else
       :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
     endif
     set viewdir=$HOME/.vim/view//
-    if has("nvim")          " avoid compatibility issues
+    if has("nvim")
         set viminfo+=n$HOME/.vim/tmp/nviminfo
     else
         set viminfo+=n$HOME/.vim/tmp/viminfo
@@ -50,11 +50,11 @@ set updatetime=100
 
 set backspace=indent,eol,start
 
-syntax on           " enable syntax processing
-set wildmenu        " visual autocomplete for command menu
-set showmatch       " highlight matching [{()}]
-set incsearch       " search as characters are entered
-set hlsearch        " highlight matches
+syntax on
+set wildmenu
+set showmatch
+set incsearch
+set hlsearch
 
 set autoindent
 filetype plugin indent on
@@ -109,13 +109,11 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
-" Make double-<Esc> clear search highlights
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
 map <leader>n :cnext<CR>
 map <leader>m :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
-
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -200,9 +198,9 @@ call plug#end()
 
 if has("gui")
     set background=light
-    set guioptions-=m  "menu bar
-    set guioptions-=T  "toolbar
-    set guioptions-=r  "scrollbar
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=r
     set guifont=Fira\ Code:h17
 else
     set background=dark
