@@ -52,7 +52,6 @@ fi
 # aliases
 alias ll="ls -l"
 alias la="ls -A"
-alias dh='dirs -v'
 
 alias -g A="| awk"
 alias -g R="| rg"
@@ -100,8 +99,9 @@ fi
 # golang - From Homebrew
 if [ -d $HOME/go ]; then
     export GOPATH=$HOME/go
+    export GOBIN=$GOPATH/bin
     export GOROOT=/usr/local/opt/go/libexec
-    export PATH=$GOPATH/bin:$PATH
+    export PATH=$GOBIN:$PATH
 fi
 
 # pyenv - From Homebrew

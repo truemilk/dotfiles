@@ -94,36 +94,6 @@ augroup remember_folds
   autocmd BufWinEnter * silent! loadview
 augroup end
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-Plug 'joshdick/onedark.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'farmergreg/vim-lastplace'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'machakann/vim-highlightedyank'
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'AndrewRadev/splitjoin.vim'
-"Plug 'SirVer/ultisnips'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-let g:fzf_preview_window = 'right:50%'
-Plug 'airblade/vim-gitgutter'
-Plug 'vimwiki/vimwiki'
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'dense-analysis/ale'
-let g:ale_linters = {'rust': ['analyzer']}
-
-
-call plug#end()
-
 set laststatus=2
 set noshowmode
 
@@ -142,9 +112,53 @@ map <C-l> <C-W>l
 " Make double-<Esc> clear search highlights
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
+map <leader>n :cnext<CR>
+map <leader>m :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
 
-" Golang
 
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'morhetz/gruvbox'
+
+Plug 'itchyny/lightline.vim'
+
+Plug 'farmergreg/vim-lastplace'
+
+Plug 'terryma/vim-multiple-cursors'
+
+Plug 'machakann/vim-highlightedyank'
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+
+Plug 'junegunn/fzf.vim'
+let g:fzf_preview_window = 'right:50%'
+map <C-p> :GFiles<CR>
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'vimwiki/vimwiki'
+let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
+
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+"Plug 'AndrewRadev/splitjoin.vim'
+"Plug 'SirVer/ultisnips'
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'dense-analysis/ale'
+let g:ale_linters = {'rust': ['analyzer']}
+
+call plug#end()
+
+""" " vim-go
+""" 
 """ autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
 """ 
 """ let g:go_list_type = "quickfix"
@@ -184,27 +198,14 @@ nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 """ autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 """ autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
 
-map <leader>n :cnext<CR>
-map <leader>m :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
-
-map <C-p> :GFiles<CR>
-
-
-
-try
-  colorscheme onedark
-  catch
-endtry
-
-"let g:lightline = { 'colorscheme': 'onedark', }
-
 if has("gui")
-    set guifont=Fira\ Code:h17
+    set background=light
     set guioptions-=m  "menu bar
     set guioptions-=T  "toolbar
     set guioptions-=r  "scrollbar
-    set background=light
+    set guifont=Fira\ Code:h17
 else
     set background=dark
+    colorscheme gruvbox
 endif
+
