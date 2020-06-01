@@ -63,20 +63,27 @@ set expandtab
 set number
 set relativenumber
 
-let mapleader = " "
-
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-noremap! <Up> <Nop>
-noremap! <Down> <Nop>
-noremap! <Left> <Nop>
-noremap! <Right> <Nop>
-
 set autoread
 set autowriteall
+
+set laststatus=2
+set noshowmode
+
+set scrolloff=10
+
+set mouse=a
+set clipboard=unnamed
+
+set splitbelow splitright
+
+set cursorline
+augroup CursorLine
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
 
 augroup AutoSaveAndLoadWithFocus
 au!
@@ -90,29 +97,22 @@ augroup remember_folds
     autocmd BufWinEnter * silent! loadview
 augroup end
 
-set laststatus=2
-set noshowmode
+let mapleader = " "
 
-set scrolloff=10
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
-set mouse=a
-set clipboard=unnamed
-
-set splitbelow splitright
+noremap! <Up> <Nop>
+noremap! <Down> <Nop>
+noremap! <Left> <Nop>
+noremap! <Right> <Nop>
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-set cursorline
-augroup CursorLine
-    au!
-    au VimEnter * setlocal cursorline
-    au WinEnter * setlocal cursorline
-    au BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
-augroup END
 
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
