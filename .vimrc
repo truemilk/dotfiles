@@ -37,11 +37,7 @@ else
       :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
     endif
     set viewdir=$HOME/.vim/view//
-    if has("nvim")
-        set viminfo+=n$HOME/.vim/tmp/nviminfo
-    else
-        set viminfo+=n$HOME/.vim/tmp/viminfo
-    endif
+    set viminfo+=n$HOME/.vim/viminfo
 endif
     
 set encoding=utf8
@@ -89,9 +85,9 @@ au!
 augroup end
 
 augroup remember_folds
-  autocmd!
-  autocmd BufWinLeave * mkview
-  autocmd BufWinEnter * silent! loadview
+    autocmd!
+    autocmd BufWinLeave * mkview
+    autocmd BufWinEnter * silent! loadview
 augroup end
 
 set laststatus=2
@@ -109,11 +105,29 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+set cursorline
+augroup CursorLine
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
+
 nnoremap <silent> <Esc><Esc> <Esc>:nohlsearch<CR><Esc>
 
-map <leader>n :cnext<CR>
-map <leader>m :cprevious<CR>
-nnoremap <leader>a :cclose<CR>
+if has("gui")
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=r
+    set guifont=Fira\ Code:h17
+endif
+
+colorscheme industry
+highlight LineNr ctermfg=240
+highlight VertSplit ctermfg=black ctermbg=235 term=NONE
+highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
+highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -122,88 +136,13 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-
-Plug 'morhetz/gruvbox'
-
 Plug 'itchyny/lightline.vim'
-
-Plug 'farmergreg/vim-lastplace'
-
-Plug 'terryma/vim-multiple-cursors'
-
-Plug 'machakann/vim-highlightedyank'
-
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-
 Plug 'junegunn/fzf.vim'
+Plug 'vimwiki/vimwiki'
+call plug#end()
+
 let g:fzf_preview_window = 'right:50%'
 map <C-p> :GFiles<CR>
 
-Plug 'airblade/vim-gitgutter'
-
-Plug 'vimwiki/vimwiki'
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
-
-"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-"Plug 'AndrewRadev/splitjoin.vim'
-"Plug 'SirVer/ultisnips'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-Plug 'dense-analysis/ale'
-let g:ale_linters = {'rust': ['analyzer']}
-
-call plug#end()
-
-""" " vim-go
-""" 
-""" autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-""" 
-""" let g:go_list_type = "quickfix"
-""" let g:go_test_timeout = '10s'
-""" let g:go_fmt_command = "goimports"
-""" let g:go_textobj_include_function_doc = 1
-""" 
-""" let g:go_highlight_types = 1
-""" let g:go_highlight_fields = 1
-""" let g:go_highlight_functions = 1
-""" let g:go_highlight_function_calls = 1
-""" let g:go_highlight_operators = 1
-""" let g:go_highlight_extra_types = 1
-""" let g:go_highlight_build_constraints = 1
-""" 
-""" let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-""" let g:go_auto_type_info = 1
-""" let g:go_auto_sameids = 1
-""" 
-""" function! s:build_go_files()
-"""   let l:file = expand('%')
-"""    if l:file =~# '^\f\+_test\.go$'
-"""      call go#test#Test(0, 1)
-"""    elseif l:file =~# '^\f\+\.go$'
-"""      call go#cmd#Build(0)
-"""    endif
-""" endfunction
-""" 
-""" " Mappings
-""" 
-""" autocmd FileType go nmap <leader>r <Plug>(go-run)
-""" autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
-""" 
-""" autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-""" autocmd Filetype go command! -bang AE call go#alternate#Switch(<bang>0, 'edit')
-""" autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-""" autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-""" autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
-
-if has("gui")
-    set background=light
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=r
-    set guifont=Fira\ Code:h17
-else
-    set background=dark
-    colorscheme gruvbox
-endif
-
