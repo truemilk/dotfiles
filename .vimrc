@@ -126,7 +126,7 @@ endif
 colorscheme industry
 highlight LineNr ctermfg=240
 highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-highlight CursorLine cterm=NONE ctermbg=235 ctermfg=white
+highlight CursorLine cterm=NONE ctermbg=235
 highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
 
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -140,6 +140,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
+Plug 'sunaku/tmux-navigate'
 call plug#end()
 
 let g:fzf_preview_window = 'right:50%'
