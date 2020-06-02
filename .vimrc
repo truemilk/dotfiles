@@ -37,7 +37,11 @@ else
       :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
     endif
     set viewdir=$HOME/.vim/view//
-    set viminfo+=n$HOME/.vim/viminfo
+    if has('nvim')
+        set viminfo+=n$HOME/.vim/nviminfo
+    else
+        set viminfo+=n$HOME/.vim/viminfo
+    endif
 endif
     
 set encoding=utf8
@@ -141,7 +145,18 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'sunaku/tmux-navigate'
+Plug 'tpope/vim-fugitive'
 call plug#end()
+
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 let g:fzf_preview_window = 'right:50%'
 map <C-p> :GFiles<CR>

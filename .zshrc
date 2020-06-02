@@ -36,10 +36,10 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 export CLICOLOR=1
 export LSCOLORS=GxFxcxdxbxegedabagacad
 
-if which vim > /dev/null; then
-    export EDITOR="vim"
+if which nvim > /dev/null; then
+    export EDITOR="nvim"
 else
-    export EDITOR="nano"
+    export EDITOR="vim"
 fi
 
 alias v="$EDITOR"
@@ -116,11 +116,11 @@ if which fzf > /dev/null; then
     export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info'
     export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
     export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-    #if which fd > /dev/null; then
-    #    export FZF_DEFAULT_COMMAND="fd . $HOME"
-    #    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-    #    export FZF_ALT_C_COMMAND="fd -t d . $HOME"
-    #fi
+    if which fd > /dev/null; then
+        export FZF_DEFAULT_COMMAND="fd . $HOME"
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+        export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+    fi
 fi
 
 if [ -d $HOME/.zextras ]; then
