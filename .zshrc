@@ -36,10 +36,10 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 export CLICOLOR=1
 export LSCOLORS=GxFxcxdxbxegedabagacad
 
-if which nvim > /dev/null; then
-    export EDITOR="nvim"
-else
+if which vim > /dev/null; then
     export EDITOR="vim"
+else
+    export EDITOR="nano"
 fi
 
 alias v="$EDITOR"
