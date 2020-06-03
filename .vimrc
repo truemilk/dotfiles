@@ -10,14 +10,14 @@ if exists('$SUDO_USER')
     set viminfo=
 else
     if isdirectory($HOME . '/.vim/swap') == 0
-      :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+        :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
     endif
     set directory=./.vim-swap//
     set directory+=~/.vim/swap//
     set directory+=~/tmp//
     set directory+=.
     if isdirectory($HOME . '/.vim/backup') == 0
-      :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+        :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
     endif
     set backupdir-=.
     set backupdir+=.
@@ -26,15 +26,15 @@ else
     set backupdir^=./.vim-backup/
     set backup
     if exists("+undofile")
-      if isdirectory($HOME . '/.vim/undo') == 0
-        :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-      endif
-      set undodir=./.vim-undo//
-      set undodir+=~/.vim/undo//
-      set undofile
+        if isdirectory($HOME . '/.vim/undo') == 0
+            :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+        endif
+        set undodir=./.vim-undo//
+        set undodir+=~/.vim/undo//
+        set undofile
     endif
     if isdirectory($HOME . '/.vim/view') == 0
-      :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+        :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
     endif
     set viewdir=$HOME/.vim/view//
     if has('nvim')
@@ -43,7 +43,7 @@ else
         set viminfo+=n$HOME/.vim/viminfo
     endif
 endif
-    
+
 set encoding=utf8
 
 set updatetime=100
@@ -90,7 +90,7 @@ augroup CursorLine
 augroup END
 
 augroup AutoSaveAndLoadWithFocus
-au!
+    au!
     au FocusGained,BufEnter * :silent! !
     au FocusLost,WinLeave * :silent! w
 augroup end
@@ -134,8 +134,8 @@ highlight CursorLine cterm=NONE ctermbg=235
 highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
 
 if empty(glob('~/.vim/autoload/plug.vim'))
-silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
@@ -149,15 +149,15 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let g:lightline = {
-    \ 'colorscheme': 'powerline',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \   'gitbranch': 'FugitiveHead'
-    \ },
-    \ }
+            \ 'colorscheme': 'powerline',
+            \ 'active': {
+            \   'left': [ [ 'mode', 'paste' ],
+            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+            \ },
+            \ 'component_function': {
+            \   'gitbranch': 'FugitiveHead'
+            \ },
+            \ }
 
 let g:fzf_preview_window = 'right:50%'
 map <C-p> :GFiles<CR>
