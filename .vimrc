@@ -50,7 +50,10 @@ set updatetime=100
 
 set backspace=indent,eol,start
 
-syntax on
+if has("syntax")
+    syntax on
+endif
+
 set wildmenu
 set showmatch
 set incsearch
