@@ -66,6 +66,7 @@ alias gacp='git add . && git commit -m "gacp!" && git push'
 
 alias uv="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias ub="brew update && brew upgrade && brew cleanup && brew cask upgrade"
+alias uz="zplug update && echo '\nReloading zsh...\n' && source ~/.zshrc"
 
 alias ze="v ~/.zshrc && echo '\nReloading zsh...\n' && source ~/.zshrc"
 alias zr="echo '\nReloading zsh...\n' && source ~/.zshrc"
