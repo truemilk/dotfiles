@@ -103,16 +103,6 @@ augroup end
 
 let mapleader = " "
 
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
-
-noremap! <Up> <Nop>
-noremap! <Down> <Nop>
-noremap! <Left> <Nop>
-noremap! <Right> <Nop>
-
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
@@ -127,12 +117,6 @@ if has("gui")
     set guifont=Fira\ Code:h17
 endif
 
-colorscheme industry
-highlight LineNr ctermfg=240
-highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-highlight CursorLine cterm=NONE ctermbg=235
-highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
-
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -140,13 +124,19 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'agude/vim-eldar'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'sunaku/tmux-navigate'
 Plug 'tpope/vim-fugitive'
 call plug#end()
+
+silent! colorscheme eldar
+highlight LineNr ctermfg=240
+highlight VertSplit ctermfg=black ctermbg=235 term=NONE
+highlight CursorLine cterm=NONE ctermbg=235
+highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
 
 let g:lightline = {
             \ 'colorscheme': 'powerline',
