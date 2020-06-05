@@ -104,14 +104,7 @@ augroup remember_folds
     autocmd BufWinEnter * silent! loadview
 augroup end
 
-let g:netrw_browse_split = 2
-
 let mapleader = " "
-
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 nnoremap <silent> <leader>/ <Esc>:nohlsearch<CR><Esc>
 
@@ -133,12 +126,13 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
-silent! colorscheme gruvbox
 set background=dark
+silent! colorscheme gruvbox
 
 let g:lightline = {
             \ 'colorscheme': 'gruvbox',
@@ -153,5 +147,7 @@ let g:lightline = {
 
 let g:fzf_preview_window = 'right:50%'
 map <C-p> :GFiles<CR>
+
+map <leader>t :NERDTreeToggle<CR>
 
 let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
