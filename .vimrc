@@ -1,6 +1,6 @@
 set nocompatible
 
-set shortmess+=A
+set shortmess+=c
 
 if exists('$SUDO_USER')
     set noswapfile
@@ -46,7 +46,7 @@ endif
 
 set encoding=utf8
 
-set updatetime=100
+set updatetime=50
 
 set backspace=indent,eol,start
 
@@ -104,6 +104,8 @@ augroup remember_folds
     autocmd BufWinEnter * silent! loadview
 augroup end
 
+let g:netrw_browse_split = 2
+
 let mapleader = " "
 
 map <C-j> <C-W>j
@@ -127,7 +129,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'agude/vim-eldar'
+Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -135,14 +137,11 @@ Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-fugitive'
 call plug#end()
 
-silent! colorscheme eldar
-highlight LineNr ctermfg=240
-highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-highlight CursorLine cterm=NONE ctermbg=235
-highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+silent! colorscheme gruvbox
+set background=dark
 
 let g:lightline = {
-            \ 'colorscheme': 'powerline',
+            \ 'colorscheme': 'gruvbox',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
