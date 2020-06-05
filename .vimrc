@@ -135,7 +135,7 @@ set background=dark
 silent! colorscheme gruvbox
 
 let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
+            \ 'colorscheme': 'powerline',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
