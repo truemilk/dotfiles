@@ -85,11 +85,6 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-#autoload -Uz vcs_info
-#precmd () { vcs_info }
-#setopt prompt_subst
-#PS1='%F{cyan}%(5~|%-1~/…/%3~|%4~)%f${vcs_info_msg_0_} %F{magenta}%%%f '
-
 export ZPLUG_HOME=/usr/local/opt/zplug
 if [ -d $ZPLUG_HOME ]; then
     source $ZPLUG_HOME/init.zsh
