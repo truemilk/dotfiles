@@ -57,7 +57,6 @@ endif
 set wildmenu
 set showmatch
 set incsearch
-set hlsearch
 
 set autoindent
 filetype plugin indent on
@@ -123,7 +122,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
@@ -134,16 +134,10 @@ call plug#end()
 set background=dark
 silent! colorscheme gruvbox
 
-let g:lightline = {
-            \ 'colorscheme': 'powerline',
-            \ 'active': {
-            \   'left': [ [ 'mode', 'paste' ],
-            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-            \ },
-            \ 'component_function': {
-            \   'gitbranch': 'FugitiveHead'
-            \ },
-            \ }
+let g:airline_highlighting_cache = 1
+let g:airline_powerline_fonts = 1
+
+let g:airline_theme='gruvbox'
 
 let g:fzf_preview_window = 'right:50%'
 map <C-p> :GFiles<CR>
