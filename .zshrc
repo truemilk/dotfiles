@@ -93,7 +93,6 @@ bindkey "^X^E" edit-command-line
 export ZPLUG_HOME=/usr/local/opt/zplug
 if [ -d $ZPLUG_HOME ]; then
     source $ZPLUG_HOME/init.zsh
-    zplug "zsh-users/zsh-autosuggestions"
     zplug "romkatv/powerlevel10k", as:theme, depth:1
     if ! zplug check --verbose; then
         printf "Install? [y/N]: "
@@ -102,9 +101,6 @@ if [ -d $ZPLUG_HOME ]; then
         fi
     fi
     zplug load
-    export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-    export ZSH_AUTOSUGGEST_USE_ASYNC=1
-    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#888888,bg=#222222"
 fi
 
 [ -d $HOME/.cargo ] && export PATH=$HOME/.cargo/bin:$PATH
