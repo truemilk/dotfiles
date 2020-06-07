@@ -39,6 +39,9 @@
 **/__pycache__
 **/.pytest_cache
 
+# vim coc
+**/.vim
+
 # jenv and pyenv
 **/.python-version
 **/.java-version

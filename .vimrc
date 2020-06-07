@@ -1,7 +1,5 @@
 set nocompatible
 
-set shortmess+=c
-
 if exists('$SUDO_USER')
     set noswapfile
     set nobackup
@@ -43,6 +41,10 @@ else
         set viminfo+=n$HOME/.vim/viminfo
     endif
 endif
+
+set hidden
+
+set shortmess+=c
 
 set encoding=utf8
 
@@ -103,16 +105,17 @@ augroup remember_folds
     autocmd BufWinEnter * silent! loadview
 augroup end
 
-let mapleader = " "
+set timeout
+set timeoutlen=2000
+set ttimeoutlen=100
 
-nnoremap <silent> <leader>/ <Esc>:nohlsearch<CR><Esc>
-
-if has("gui")
-    set guioptions-=m
-    set guioptions-=T
-    set guioptions-=r
-    set guifont=Fira\ Code:h17
+if has("patch-8.1.1564")
+    set signcolumn=number
+else
+    set signcolumn=yes
 endif
+
+let mapleader = " "
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -126,22 +129,12 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'preservim/nerdtree'
-Plug 'vimwiki/vimwiki'
-Plug 'tpope/vim-fugitive'
 call plug#end()
 
 set background=dark
 silent! colorscheme gruvbox
 
-let g:airline_highlighting_cache = 1
-let g:airline_powerline_fonts = 1
-
 let g:airline_theme='gruvbox'
 
 let g:fzf_preview_window = 'right:50%'
 map <C-p> :GFiles<CR>
-
-map <leader>t :NERDTreeToggle<CR>
-
-let g:vimwiki_list = [{'path': '~/vimwiki/', 'syntax': 'markdown', 'ext': '.md'}]
