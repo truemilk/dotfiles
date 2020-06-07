@@ -116,14 +116,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-"Plug 'agude/vim-eldar'
-"Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 call plug#end()
 
 set background=dark
 silent! colorscheme elflord
-"silent! colorscheme gruvbox
 highlight LineNr ctermfg=240
 highlight VertSplit ctermfg=black ctermbg=235 term=NONE
 highlight CursorLine cterm=NONE ctermbg=235
