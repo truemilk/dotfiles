@@ -71,8 +71,6 @@ alias uz="zplug update && echo '\nReloading zsh...\n' && source ~/.zshrc"
 alias ze="v ~/.zshrc && echo '\nReloading zsh...\n' && source ~/.zshrc"
 alias zr="echo '\nReloading zsh...\n' && source ~/.zshrc"
 
-alias wiki="vim -c VimwikiIndex"
-
 tm() {
     if (( $# != 1 )); then
         tmux list-sessions
