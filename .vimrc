@@ -1,5 +1,5 @@
-set nocompatible
-
+" Deal with swap/backup/undo/vimfile
+" Don't create any if root
 if exists('$SUDO_USER')
     set noswapfile
     set nobackup
@@ -45,6 +45,7 @@ endif
 set hidden
 
 set shortmess+=c
+
 
 set encoding=utf8
 
@@ -108,12 +109,6 @@ augroup end
 set timeout
 set timeoutlen=2000
 set ttimeoutlen=100
-
-if has("patch-8.1.1564")
-    set signcolumn=number
-else
-    set signcolumn=yes
-endif
 
 let mapleader = " "
 
