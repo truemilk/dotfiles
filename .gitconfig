@@ -26,4 +26,4 @@
 [include]
     path = .gitconfig.local
 [pull]
-	rebase = false
+    rebase = false
