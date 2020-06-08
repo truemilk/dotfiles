@@ -104,7 +104,6 @@ augroup remember_folds
 augroup end
 
 set timeout
-"set timeoutlen=2000
 set ttimeoutlen=100
 
 let mapleader = " "
@@ -116,12 +115,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 call plug#end()
 
 set background=dark
-silent! colorscheme elflord
-highlight LineNr ctermfg=240
-highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-highlight CursorLine cterm=NONE ctermbg=235
-highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+silent! colorscheme gruvbox
