@@ -119,5 +119,6 @@ Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 call plug#end()
 
+
 set background=dark
 silent! colorscheme gruvbox
