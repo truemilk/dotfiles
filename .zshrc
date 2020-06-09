@@ -70,18 +70,18 @@ alias update-all-zplug="zplug update && zreload"
 alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias update-all-brew="brew update && brew upgrade && brew cleanup && brew cask upgrade && zreload"
 
-up() {
+update() {
     if (( $# != 1 )); then
         echo "Say something..."
     else
         case "$1" in
-            "z") update-all-zplug
+            "zplug") update-all-zplug
                 ;;
-            "v") update-all-vim
+            "vim") update-all-vim
                 ;;
-            "b") update-all-brew
+            "brew") update-all-brew
                 ;;
-            "a") update-all-zplug
+            "all") update-all-zplug
                 update-all-vim
                 update-all-brew
                 ;;
