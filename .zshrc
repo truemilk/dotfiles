@@ -64,12 +64,30 @@ alias -g V="| vim -"
 
 alias gacp='git add . && git commit -m "gacp!" && git push'
 
-alias uv="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
-alias ub="brew update && brew upgrade && brew cleanup && brew cask upgrade"
-alias uz="zplug update && echo '\nReloading zsh...\n' && source ~/.zshrc"
+alias zreload="echo '\nReloading zsh...\n' && source ~/.zshrc"
+alias zshrc="v ~/.zshrc && zreload"
+alias update-all-zplug="zplug update && zreload"
+alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
+alias update-all-brew="brew update && brew upgrade && brew cleanup && brew cask upgrade && zreload"
 
-alias ze="v ~/.zshrc && echo '\nReloading zsh...\n' && source ~/.zshrc"
-alias zr="echo '\nReloading zsh...\n' && source ~/.zshrc"
+up() {
+    if (( $# != 1 )); then
+        echo "Say something..."
+    else
+        case "$1" in
+            "z") update-all-zplug
+                ;;
+            "v") update-all-vim
+                ;;
+            "b") update-all-brew
+                ;;
+            "a") update-all-zplug
+                update-all-vim
+                update-all-brew
+                ;;
+            esac
+    fi
+}
 
 tm() {
     if (( $# != 1 )); then
