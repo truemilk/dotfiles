@@ -51,8 +51,8 @@ fi
 
 alias v="$EDITOR"
 
-alias ll="ls -l"
-alias la="ls -A"
+alias ll="exa --long --git"
+alias la="exa --all"
 
 alias -g A="| awk"
 alias -g R="| rg"
