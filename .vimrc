@@ -116,9 +116,13 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 
 set background=dark
 silent! colorscheme gruvbox
+
+let g:airline_theme='gruvbox'
