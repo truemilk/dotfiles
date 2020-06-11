@@ -153,8 +153,8 @@ fi
 
 if which fzf > /dev/null; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --inline-info'
-    export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border horizontal  --inline-info'
+    export FZF_CTRL_R_OPTS="-i"
     export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
     if which fd > /dev/null; then
         export FZF_DEFAULT_COMMAND="fd . $HOME"
