@@ -3,16 +3,16 @@
 system_type=$(uname -s)
 
 if [ "$system_type" = "Darwin" ]; then
-
     if [ -f "$HOME/.Brewfile" ]; then
         echo "Updating homebrew bundle"
         brew bundle --global
+        echo "Brew completed"
     fi
-
 fi
 
 if command -v vim >/dev/null 2>&1; then
     echo "Bootstraping Vim"
     vim '+PlugUpdate' '+PlugUpgrade' '+PlugClean!' '+qall'
+    echo "Vim plugins installed"
 fi
 
