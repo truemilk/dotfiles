@@ -23,5 +23,6 @@ brew "pyenv"
 brew "pyenv-virtualenv"
 
 brew "awscli"
+brew "terraform"
 
 cask "alacritty"

@@ -116,13 +116,16 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
-"Plug 'itchyny/lightline.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+Plug 'hashivim/vim-terraform'
 call plug#end()
-
 
 set background=dark
 silent! colorscheme gruvbox
 
-let g:airline_theme='gruvbox'
+"let g:airline_theme='gruvbox'
+
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
