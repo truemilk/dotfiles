@@ -12,6 +12,8 @@ brew "ripgrep"
 brew "exa"
 
 brew "vim"
+brew "neovim"
+
 brew "tmux"
 brew "abduco"
 brew "mosh"
@@ -26,3 +28,6 @@ brew "awscli"
 brew "terraform"
 
 cask "alacritty"
+
+tap "d12frosted/emacs-plus"
+brew "emacs-plus@27", args: ["with-modern-icon-black-variant"]

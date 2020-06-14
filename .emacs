@@ -181,6 +181,25 @@
 (use-package org-bullets
   :hook (org-mode . org-bullets-mode))
 
+(use-package evil
+  :ensure t
+  :init ;; tweak evil's configuration before loading it
+  (setq evil-vsplit-window-right t)
+  (setq evil-split-window-below t)
+  :config ;; tweak evil after loading it
+  (evil-mode))
+
+(use-package evil-org
+  :ensure t
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda ()
+              (evil-org-set-key-theme)))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
+
 ;;
 ;; org-mode configuration
 ;;
