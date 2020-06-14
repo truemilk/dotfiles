@@ -117,11 +117,18 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 Plug 'hashivim/vim-terraform'
 call plug#end()
 
 set background=dark
 silent! colorscheme gruvbox
+
+let g:fzf_layout = { 'window': 'enew' }
+nnoremap <c-p> :Files<cr>
+let g:fzf_preview_window = 'right:60%'
+let g:fzf_buffers_jump = 1
 
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
