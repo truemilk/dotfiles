@@ -51,6 +51,8 @@ fi
 
 alias v="$EDITOR"
 
+#export MANPAGER="nvim +Man! -c ':set signcolumn='"
+
 alias ll="exa --long --git"
 alias la="exa --all"
 
@@ -96,6 +98,7 @@ update() {
             esac
     fi
 }
+
 
 tm() {
     if (( $# != 1 )); then

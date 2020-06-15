@@ -19,7 +19,9 @@ brew "abduco"
 brew "mosh"
 
 brew "go"
+
 brew "node"
+
 brew "pipenv"
 brew "pyenv"
 brew "pyenv-virtualenv"
@@ -30,4 +32,4 @@ brew "terraform"
 cask "alacritty"
 
 tap "d12frosted/emacs-plus"
-brew "emacs-plus@27", args: ["with-modern-icon-black-variant"]
+brew "emacs-plus@27", args: ["with-modern-icon-sexy-v2"]

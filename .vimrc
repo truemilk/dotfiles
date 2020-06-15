@@ -108,27 +108,34 @@ set ttimeoutlen=100
 
 let mapleader = " "
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+"if empty(glob('~/.vim/autoload/plug.vim'))
+"    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
 
-call plug#begin('~/.vim/plugged')
-Plug 'gruvbox-community/gruvbox'
-Plug 'itchyny/lightline.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'hashivim/vim-terraform'
-call plug#end()
+"call plug#begin('~/.vim/plugged')
+"Plug 'gruvbox-community/gruvbox'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
+"Plug 'lambdalisue/gina.vim'
+"Plug 'airblade/vim-gitgutter'
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
+"Plug 'hashivim/vim-terraform'
+"call plug#end()
 
 set background=dark
-silent! colorscheme gruvbox
+"silent! colorscheme gruvbox
 
-let g:fzf_layout = { 'window': 'enew' }
-nnoremap <c-p> :Files<cr>
-let g:fzf_preview_window = 'right:60%'
-let g:fzf_buffers_jump = 1
 
-let g:terraform_align=1
-let g:terraform_fmt_on_save=1
+"let g:airline_powerline_fonts = 1
+"let g:airline_theme='gruvbox'
+
+"let g:fzf_layout = { 'window': 'enew' }
+"nnoremap <c-p> :Files<cr>
+"let g:fzf_preview_window = 'right:60%'
+"let g:fzf_buffers_jump = 1
+
+"let g:terraform_align=1
+"let g:terraform_fmt_on_save=1
