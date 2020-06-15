@@ -1,5 +1,3 @@
-" Deal with swap/backup/undo/vimfile
-" Don't create any if root
 if exists('$SUDO_USER')
     set noswapfile
     set nobackup
@@ -118,11 +116,6 @@ let mapleader = " "
 "Plug 'gruvbox-community/gruvbox'
 "Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
-"Plug 'lambdalisue/gina.vim'
-"Plug 'airblade/vim-gitgutter'
-"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-"Plug 'junegunn/fzf.vim'
-"Plug 'hashivim/vim-terraform'
 "call plug#end()
 
 set background=dark
@@ -131,16 +124,7 @@ highlight LineNr ctermfg=240
 highlight VertSplit ctermfg=black ctermbg=235 term=NONE
 highlight CursorLine cterm=NONE ctermbg=235
 highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+
 "silent! colorscheme gruvbox
-
-
 "let g:airline_powerline_fonts = 1
 "let g:airline_theme='gruvbox'
-
-"let g:fzf_layout = { 'window': 'enew' }
-"nnoremap <c-p> :Files<cr>
-"let g:fzf_preview_window = 'right:60%'
-"let g:fzf_buffers_jump = 1
-
-"let g:terraform_align=1
-"let g:terraform_fmt_on_save=1
