@@ -53,8 +53,11 @@ alias v="$EDITOR"
 
 #export MANPAGER="nvim +Man! -c ':set signcolumn='"
 
-alias ll="exa --long --git"
-alias la="exa --all"
+if which exa > /dev/null; then
+    alias ls="exa"
+    alias la="exa --all"
+    alias ll="exa --long --git"
+fi
 
 alias -g A="| awk"
 alias -g R="| rg"

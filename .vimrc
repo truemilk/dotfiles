@@ -114,17 +114,8 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
+Plug 'bling/vim-bufferline'
 call plug#end()
 
-"set background=dark
-"colorscheme industry
-"highlight LineNr ctermfg=240
-"highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-"highlight CursorLine cterm=NONE ctermbg=235
-"highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
-
 silent! colorscheme gruvbox
-"let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
