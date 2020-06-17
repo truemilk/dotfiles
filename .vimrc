@@ -44,7 +44,7 @@ set hidden
 
 set shortmess+=c
 
-set updatetime=50
+set updatetime=100
 
 set backspace=indent,eol,start
 
@@ -106,25 +106,25 @@ set ttimeoutlen=100
 
 let mapleader = " "
 
-"if empty(glob('~/.vim/autoload/plug.vim'))
-"    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-"                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-"    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-"endif
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-"call plug#begin('~/.vim/plugged')
-"Plug 'gruvbox-community/gruvbox'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-"call plug#end()
+call plug#begin('~/.vim/plugged')
+Plug 'gruvbox-community/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+call plug#end()
 
-set background=dark
-colorscheme industry
-highlight LineNr ctermfg=240
-highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-highlight CursorLine cterm=NONE ctermbg=235
-highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+"set background=dark
+"colorscheme industry
+"highlight LineNr ctermfg=240
+"highlight VertSplit ctermfg=black ctermbg=235 term=NONE
+"highlight CursorLine cterm=NONE ctermbg=235
+"highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
 
-"silent! colorscheme gruvbox
+silent! colorscheme gruvbox
 "let g:airline_powerline_fonts = 1
-"let g:airline_theme='gruvbox'
+let g:airline_theme='gruvbox'
