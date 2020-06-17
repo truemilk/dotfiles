@@ -48,3 +48,8 @@
 
 # projectile (emacs)
 **/.projectile
+
+# Terraform
+**/.terraform
+**/terraform.tfstate
+**/terraform.tfstate.backup
