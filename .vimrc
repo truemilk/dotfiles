@@ -106,6 +106,12 @@ set ttimeoutlen=100
 
 let mapleader = " "
 
+colorscheme elflord
+highlight LineNr ctermfg=240
+highlight VertSplit ctermfg=black ctermbg=235 term=NONE
+highlight CursorLine cterm=NONE ctermbg=235
+highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -113,9 +119,15 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'gruvbox-community/gruvbox'
+Plug 'itchyny/landscape.vim'
 Plug 'itchyny/lightline.vim'
-Plug 'bling/vim-bufferline'
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
-silent! colorscheme gruvbox
+set background=dark
+silent! colorscheme landscape
+
+let g:lightline = { 'colorscheme': 'landscape' }
+
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
