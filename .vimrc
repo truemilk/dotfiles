@@ -119,15 +119,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-Plug 'itchyny/landscape.vim'
+Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
-Plug 'hashivim/vim-terraform'
 call plug#end()
 
 set background=dark
-silent! colorscheme landscape
-
-let g:lightline = { 'colorscheme': 'landscape' }
-
-let g:terraform_align=1
-let g:terraform_fmt_on_save=1
+silent! colorscheme gruvbox

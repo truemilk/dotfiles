@@ -9,7 +9,6 @@ brew "git"
 brew "fzf"
 brew "fd"
 brew "ripgrep"
-brew "exa"
 
 brew "vim"
 brew "neovim"
@@ -27,6 +26,8 @@ brew "pyenv"
 brew "pyenv-virtualenv"
 
 brew "awscli"
+brew "aws-shell"
+brew "awscurl"
 brew "terraform"
 brew "terraforming"
 
