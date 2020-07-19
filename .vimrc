@@ -121,7 +121,11 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
+Plug 'hashivim/vim-terraform'
 call plug#end()
 
 set background=dark
 silent! colorscheme gruvbox
+
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1

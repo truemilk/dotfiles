@@ -30,6 +30,7 @@ brew "aws-shell"
 brew "awscurl"
 brew "terraform"
 brew "terraforming"
+brew "terragrunt"
 
 cask "alacritty"
 
