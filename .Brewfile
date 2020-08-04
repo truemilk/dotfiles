@@ -1,3 +1,5 @@
+tap "homebrew/cask"
+
 brew "zsh"
 brew "zsh-completions"
 brew "zplug"
@@ -9,6 +11,7 @@ brew "git"
 brew "fzf"
 brew "fd"
 brew "ripgrep"
+brew "wget"
 
 brew "vim"
 brew "neovim"
@@ -33,6 +36,3 @@ brew "terraforming"
 brew "terragrunt"
 
 cask "alacritty"
-
-tap "d12frosted/emacs-plus"
-brew "emacs-plus@27", args: ["with-modern-icon-sexy-v2"]
