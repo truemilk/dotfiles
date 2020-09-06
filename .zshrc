@@ -72,7 +72,7 @@ alias zshrc="v ~/.zshrc && zreload"
 
 alias update-all-zplug="zplug update"
 alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
-alias update-all-brew="brew update && brew upgrade && brew cleanup && brew cask upgrade"
+alias update-all-brew="brew update && brew upgrade && brew cleanup"
 
 update() {
     if (( $# != 1 )); then
