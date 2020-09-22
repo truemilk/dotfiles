@@ -122,6 +122,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'gruvbox-community/gruvbox'
 Plug 'itchyny/lightline.vim'
 Plug 'hashivim/vim-terraform'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 call plug#end()
 
 set background=dark
@@ -129,3 +130,18 @@ silent! colorscheme gruvbox
 
 let g:terraform_fmt_on_save=1
 let g:terraform_align=1
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+
+let g:go_auto_type_info = 1
+
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
+autocmd FileType go nmap <leader>gb  <Plug>(go-build)
+autocmd FileType go nmap <Leader>gc <Plug>(go-coverage-toggle)
+
+au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl

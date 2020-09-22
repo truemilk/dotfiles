@@ -8,6 +8,7 @@ brew "bash"
 brew "fish"
 
 brew "git"
+brew "gh"
 brew "fzf"
 brew "fd"
 brew "ripgrep"
