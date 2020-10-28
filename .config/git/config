@@ -16,14 +16,21 @@
     whitespace = red reverse
 
 [push]
-    default = simple
+    default = current
 
 [alias]
-    dag = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)%an <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
-    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    co = checkout
+    bb = branch --all -vv
+    ls = log --all --graph --decorate
+    ll = log --all --graph --decorate --numstat
 
 [include]
     path = config.local
+
 [pull]
     rebase = false
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false

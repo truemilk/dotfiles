@@ -46,6 +46,8 @@
 **/.python-version
 **/.java-version
 
+**/.sdkmanrc
+
 # projectile (emacs)
 **/.projectile
 
