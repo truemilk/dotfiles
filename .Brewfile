@@ -32,11 +32,11 @@ brew "pipenv"
 brew "pyenv"
 brew "pyenv-virtualenv"
 
+brew "jenv"
+
 brew "awscli"
 brew "aws-shell"
 brew "awscurl"
 brew "terraform"
 brew "terraforming"
 brew "terragrunt"
-
-cask "alacritty"
