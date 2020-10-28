@@ -51,8 +51,6 @@ fi
 
 alias v="$EDITOR"
 
-#export MANPAGER="nvim +Man! -c ':set signcolumn='"
-
 alias ls="ls -F"
 alias la="ls -A"
 alias ll="ls -l"
@@ -71,7 +69,7 @@ alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
 alias update-all-zplug="zplug update"
-alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
+#alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias update-all-brew="brew update && brew upgrade && brew cleanup"
 
 update() {
@@ -92,7 +90,7 @@ update() {
                 ;;
             "all")
                 update-all-zplug
-                update-all-vim
+                #update-all-vim
                 update-all-brew
                 zreload
                 ;;
@@ -117,6 +115,7 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 if [ -d $ZPLUG_HOME ]; then
     source $ZPLUG_HOME/init.zsh
     zplug "romkatv/powerlevel10k", as:theme, depth:1
+    zplug "zsh-users/zsh-syntax-highlighting", defer:2
     if ! zplug check --verbose; then
         printf "Install? [y/N]: "
         if read -q; then
@@ -125,6 +124,16 @@ if [ -d $ZPLUG_HOME ]; then
     fi
     zplug load
 fi
+
+#autoload -U colors && colors
+#autoload -Uz vcs_info
+#zstyle ':vcs_info:*' enable git
+#precmd() {
+#    vcs_info
+#}
+#zstyle ':vcs_info:git*' formats "%{$fg[grey]%}%s %{$reset_color%}%r/%S%{$fg[grey]%} %{$fg[blue]%}%b (%a) %{$reset_color%}%m%u%c%{$reset_color%} "
+#setopt prompt_subst
+#PROMPT='${vcs_info_msg_0_}%# '
 
 [ -d $HOME/.cargo ] && export PATH=$HOME/.cargo/bin:$PATH
 
@@ -153,6 +162,11 @@ fi
 if [ -d $HOME/.sdkman ]; then
     export SDKMAN_DIR="$HOME/.sdkman"
     [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+fi
+
+if which jenv > /dev/null; then
+    export PATH="$HOME/.jenv/bin:$PATH"
+    eval "$(jenv init -)"
 fi
 
 if which fzf > /dev/null; then
