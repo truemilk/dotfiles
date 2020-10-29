@@ -69,7 +69,7 @@ alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
 alias update-all-zplug="zplug update"
-#alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
+alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias update-all-brew="brew update && brew upgrade && brew cleanup"
 
 update() {
@@ -90,7 +90,7 @@ update() {
                 ;;
             "all")
                 update-all-zplug
-                #update-all-vim
+                update-all-vim
                 update-all-brew
                 zreload
                 ;;
@@ -186,10 +186,12 @@ if [ -d $HOME/.zextras ]; then
         source $i
 fi
 
+export GPG_TTY=$(tty)
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
