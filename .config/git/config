@@ -19,13 +19,9 @@
     default = current
 
 [alias]
-    co = checkout
     bb = branch --all -vv
     ls = log --all --graph --decorate
-    ll = log --all --graph --decorate --numstat
-
-[include]
-    path = config.local
+    ll = log --all --graph --decorate --numstat --pretty=fuller
 
 [pull]
     rebase = false
@@ -33,4 +29,7 @@
 	tool = vimdiff
 	conflictstyle = diff3
 [mergetool]
-	prompt = false
+    prompt = false
+
+[include]
+    path = config.local
