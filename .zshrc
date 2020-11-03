@@ -98,7 +98,6 @@ update() {
     fi
 }
 
-
 tm() {
     if (( $# != 1 )); then
         tmux list-sessions
@@ -124,16 +123,6 @@ if [ -d $ZPLUG_HOME ]; then
     fi
     zplug load
 fi
-
-#autoload -U colors && colors
-#autoload -Uz vcs_info
-#zstyle ':vcs_info:*' enable git
-#precmd() {
-#    vcs_info
-#}
-#zstyle ':vcs_info:git*' formats "%{$fg[grey]%}%s %{$reset_color%}%r/%S%{$fg[grey]%} %{$fg[blue]%}%b (%a) %{$reset_color%}%m%u%c%{$reset_color%} "
-#setopt prompt_subst
-#PROMPT='${vcs_info_msg_0_}%# '
 
 [ -d $HOME/.cargo ] && export PATH=$HOME/.cargo/bin:$PATH
 
@@ -186,10 +175,10 @@ if [ -d $HOME/.zextras ]; then
         source $i
 fi
 
-export GPG_TTY=$(tty)
-
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+export GPG_TTY=$TTY
 
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 

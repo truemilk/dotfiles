@@ -40,3 +40,10 @@ brew "awscurl"
 brew "terraform"
 brew "terraforming"
 brew "terragrunt"
+
+brew "kubectl"
+brew "kubectx"
+
+brew "gpg2"
+brew "gnupg"
+brew "pinentry-mac"
