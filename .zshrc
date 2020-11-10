@@ -114,7 +114,6 @@ export ZPLUG_HOME=/usr/local/opt/zplug
 if [ -d $ZPLUG_HOME ]; then
     source $ZPLUG_HOME/init.zsh
     zplug "romkatv/powerlevel10k", as:theme, depth:1
-    zplug "zsh-users/zsh-syntax-highlighting", defer:2
     if ! zplug check --verbose; then
         printf "Install? [y/N]: "
         if read -q; then
