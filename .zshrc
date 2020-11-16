@@ -64,29 +64,7 @@ alias gacp='git add . && git commit -m "gacp!" && git push'
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
-alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias update-all-brew="brew update && brew upgrade && brew cleanup"
-
-update() {
-    if (( $# != 1 )); then
-        echo "Say something..."
-    else
-        case "$1" in
-            "vim")
-                update-all-vim
-                ;;
-            "brew")
-                update-all-brew
-                zreload
-                ;;
-            "all")
-                update-all-vim
-                update-all-brew
-                zreload
-                ;;
-            esac
-    fi
-}
 
 tm() {
     if (( $# != 1 )); then
