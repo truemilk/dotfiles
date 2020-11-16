@@ -2,7 +2,7 @@ tap "homebrew/cask"
 
 brew "zsh"
 brew "zsh-completions"
-brew "zplug"
+brew "starship"
 
 brew "bash"
 brew "fish"

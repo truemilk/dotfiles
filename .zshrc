@@ -1,10 +1,3 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 bindkey -e
 export KEYTIMEOUT=1
 
@@ -71,7 +64,6 @@ alias gacp='git add . && git commit -m "gacp!" && git push'
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
-alias update-all-zplug="zplug update"
 alias update-all-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 alias update-all-brew="brew update && brew upgrade && brew cleanup"
 
@@ -80,10 +72,6 @@ update() {
         echo "Say something..."
     else
         case "$1" in
-            "zplug")
-                update-all-zplug
-                zreload
-                ;;
             "vim")
                 update-all-vim
                 ;;
@@ -92,7 +80,6 @@ update() {
                 zreload
                 ;;
             "all")
-                update-all-zplug
                 update-all-vim
                 update-all-brew
                 zreload
@@ -112,19 +99,6 @@ tm() {
 autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
-
-export ZPLUG_HOME=/usr/local/opt/zplug
-if [ -d $ZPLUG_HOME ]; then
-    source $ZPLUG_HOME/init.zsh
-    zplug "romkatv/powerlevel10k", as:theme, depth:1
-    if ! zplug check --verbose; then
-        printf "Install? [y/N]: "
-        if read -q; then
-            echo; zplug install
-        fi
-    fi
-    zplug load
-fi
 
 [ -d $HOME/.cargo ] && export PATH=$HOME/.cargo/bin:$PATH
 
@@ -184,5 +158,4 @@ export GPG_TTY=$TTY
 
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(starship init zsh)"
