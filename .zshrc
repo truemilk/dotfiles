@@ -63,6 +63,9 @@ alias -g F="| fzf"
 alias -g C="| pbcopy"
 alias -g V="| vim -"
 
+alias ..='cd ..'
+alias ...='cd .. && cd ..'
+
 alias gacp='git add . && git commit -m "gacp!" && git push'
 
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
