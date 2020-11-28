@@ -1,6 +1,6 @@
 [core]
     editor = vim
-    excludesfile = ~/.config/git/ignore
+    excludesfile = ignore
     autocrlf = input
     pager = less -FMRiX
 
@@ -21,6 +21,7 @@
 [alias]
     ls = log --all --graph --decorate
     ll = log --all --graph --decorate --numstat --pretty=fuller
+    up = pull
     co = checkout
     cb = checkout -b
     pu = push -u
