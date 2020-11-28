@@ -2,7 +2,7 @@ bindkey -e
 export KEYTIMEOUT=1
 
 HISTFILE="$HOME/.zhistory"
-HISTSIZE=1000
+HISTSIZE=100000
 SAVEHIST=$HISTSIZE
 setopt BANG_HIST
 setopt EXTENDED_HISTORY
@@ -59,12 +59,10 @@ alias -g V="| vim -"
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
 
-alias gacp='git add . && git commit -m "gacp!" && git push'
-
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
-alias update-all-brew="brew update && brew upgrade && brew cleanup"
+alias pedavena="brew update && brew upgrade && brew cleanup"
 
 tm() {
     if (( $# != 1 )); then
@@ -114,7 +112,7 @@ fi
 
 if which fzf > /dev/null; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border horizontal  --inline-info'
+    export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --border horizontal  --inline-info'
     export FZF_CTRL_R_OPTS="-i"
     export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
     if which fd > /dev/null; then

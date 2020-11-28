@@ -19,17 +19,29 @@
     default = current
 
 [alias]
-    bb = branch --all -vv
     ls = log --all --graph --decorate
     ll = log --all --graph --decorate --numstat --pretty=fuller
+    co = checkout
+    cb = checkout -b
+    pu = push -u
+    ri = rebase -i
+    bb = branch --all -vv
 
 [pull]
     rebase = false
+
 [merge]
-	tool = vimdiff
-	conflictstyle = diff3
+    tool = vimdiff
+    conflictstyle = diff3
+
 [mergetool]
     prompt = false
 
+#[include]
+#    path = config.local
+
 [include]
-    path = config.local
+    path = config-personal
+
+[includeIf "gitdir:~/github-transferwise/"]
+    path = config-work

@@ -1,14 +1,2 @@
 [directory]
 truncation_symbol = "…/"
-
-[python]
-symbol = ""
-
-[java]
-symbol = ""
-
-[golang]
-symbol = ""
-
-[rust]
-symbol = ""
