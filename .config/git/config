@@ -37,11 +37,8 @@
 [mergetool]
     prompt = false
 
-#[include]
-#    path = config.local
-
 [include]
     path = config-personal
 
-[includeIf "gitdir:~/github-transferwise/"]
+[includeIf "gitdir:~/github-work/"]
     path = config-work
