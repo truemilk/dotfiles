@@ -42,4 +42,4 @@
     path = config-personal
 
 [includeIf "gitdir:~/github-transferwise/"]
-    path = config-work
+    path = config-transferwise
