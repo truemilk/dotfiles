@@ -1,6 +1,6 @@
 [core]
     editor = vim
-    excludesfile = ignore
+    excludesfile = .config/git/ignore
     autocrlf = input
     pager = less -FMRiX
 
