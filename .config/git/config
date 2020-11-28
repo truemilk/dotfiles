@@ -40,5 +40,5 @@
 [include]
     path = config-personal
 
-[includeIf "gitdir:~/github-work/"]
+[includeIf "gitdir:~/github-transferwise/"]
     path = config-work
