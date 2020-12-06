@@ -62,13 +62,27 @@ alias ...='cd .. && cd ..'
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
-alias pedavena="brew update && brew upgrade && brew cleanup"
+alias pdvn="brew update && brew upgrade && brew cleanup"
+alias update-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 
-tm() {
+alias tm="tmux new-session -A"
+alias tml="tmux list-sessions"
+
+tma() {
     if (( $# != 1 )); then
-        tmux list-sessions
+        #tmux attach-session
+        echo 'I need a session name!'
     else
-        tmux new-session -A -s $1
+        tmux attach-session -t $1
+    fi
+}
+
+tmn() {
+    if (( $# != 1 )); then
+        #tmux new-session
+        echo 'I need a session name!'
+    else
+        tmux new-session -s $1
     fi
 }
 
@@ -118,6 +132,7 @@ if which fzf > /dev/null; then
     if which fd > /dev/null; then
         export FZF_DEFAULT_COMMAND="fd . $HOME"
         export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+        bindkey "ç" fzf-cd-widget
         export FZF_ALT_C_COMMAND="fd -t d . $HOME"
     fi
 fi

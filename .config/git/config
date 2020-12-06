@@ -20,7 +20,7 @@
 
 [alias]
     ls = log --all --graph --decorate
-    ll = log --all --graph --decorate --numstat --pretty=fuller
+    ll = log --all --graph --decorate --numstat --pretty=fuller --show-signature
     up = pull
     co = checkout
     cb = checkout -b

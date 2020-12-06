@@ -65,13 +65,13 @@ set shiftwidth=4
 set expandtab
 
 set number
-set relativenumber
+"set relativenumber
 
 set autoread
 set autowriteall
 
 set laststatus=2
-set noshowmode
+"set noshowmode
 
 set scrolloff=5
 
@@ -111,3 +111,4 @@ highlight LineNr ctermfg=240
 highlight VertSplit ctermfg=black ctermbg=235 term=NONE
 highlight CursorLine cterm=NONE ctermbg=235
 highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+
