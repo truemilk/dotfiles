@@ -106,9 +106,19 @@ set ttimeoutlen=100
 
 let mapleader = " "
 
-colorscheme elflord
-highlight LineNr ctermfg=240
-highlight VertSplit ctermfg=black ctermbg=235 term=NONE
-highlight CursorLine cterm=NONE ctermbg=235
-highlight CursorLineNR cterm=NONE ctermbg=235 ctermfg=245
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'gruvbox-community/gruvbox'
+Plug 'itchyny/lightline.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+call plug#end()
+
+set background=dark
+silent! colorscheme gruvbox
+
 

@@ -23,13 +23,22 @@
     ll = log --all --graph --decorate --numstat --pretty=fuller --show-signature
     up = pull
     co = checkout
-    cb = checkout -b
+    cob = checkout -b
     pu = push -u
     ri = rebase -i
-    bb = branch --all -vv
+    b = branch --all -vv
+    s = status -s
+    ss = status
+    del = branch -D
+    br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    save = !git add -A && git commit -m 'chore: commit save point'
+    undo = reset HEAD~1 --mixed
+    res = !git reset --hard
+    done = !git push origin HEAD
+    lg = log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(green)(%cr) [%an]\" --abbrev-commit -50
 
 [pull]
-    rebase = false
+    rebase = true
 
 [merge]
     tool = vimdiff
@@ -41,5 +50,5 @@
 [include]
     path = config-personal
 
-[includeIf "gitdir:~/github-transferwise/"]
+[includeIf "gitdir:~/git/transferwise/"]
     path = config-transferwise

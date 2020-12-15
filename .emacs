@@ -50,7 +50,7 @@
 
 (when (window-system)
   ;(set-default-font "JetBrains Mono-15") ; doesn't work anymore in emacs 27 on osx
-  (set-face-attribute 'default nil :family "JetBrains Mono" :height 170)
+  (set-face-attribute 'default nil :family "Fira Code" :height 150)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
   (load-theme 'leuven)
@@ -143,17 +143,17 @@
 ;  (if (not (file-exist-p file))
                                         ;      (write-region "" nil file nil 0)))
 
-(use-package display-line-numbers
-  :ensure nil
-  :custom
-  (display-line-numbers-grow-only t)
-  (display-line-numbers-width-start t))
+;(use-package display-line-numbers
+;  :ensure nil
+;  :custom
+;  (display-line-numbers-grow-only t)
+;  (display-line-numbers-width-start t))
 
-(unless (version< emacs-version "27")
-  (use-package tab-line
-    :ensure nil
-    :hook (after-init . global-tab-line-mode)
-    ))
+;;(unless (version< emacs-version "27")
+;;  (use-package tab-line
+;;    :ensure nil
+;;    :hook (after-init . global-tab-line-mode)
+;;    ))
 
 (use-package ivy
   :demand
@@ -178,27 +178,9 @@
   (which-key-mode)
   )
 
-(use-package org-bullets
-  :hook (org-mode . org-bullets-mode))
 
-(use-package evil
-  :ensure t
-  :init ;; tweak evil's configuration before loading it
-  (setq evil-vsplit-window-right t)
-  (setq evil-split-window-below t)
-  :config ;; tweak evil after loading it
-  (evil-mode))
-
-(use-package evil-org
-  :ensure t
-  :after org
-  :config
-  (add-hook 'org-mode-hook 'evil-org-mode)
-  (add-hook 'evil-org-mode-hook
-            (lambda ()
-              (evil-org-set-key-theme)))
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
+;(use-package org-bullets
+;  :hook (org-mode . org-bullets-mode))
 
 ;;
 ;; org-mode configuration
