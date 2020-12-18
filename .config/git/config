@@ -31,7 +31,7 @@
     ss = status
     del = branch -D
     br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-    save = !git add -A && git commit -m 'chore: commit save point'
+    save = !git add -A && git commit -m 'commit save point'
     undo = reset HEAD~1 --mixed
     res = !git reset --hard
     done = !git push origin HEAD

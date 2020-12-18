@@ -62,7 +62,7 @@ alias ...='cd .. && cd ..'
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
-alias pdvn="brew update && brew upgrade && brew cleanup"
+alias pedavena="brew update && brew upgrade && brew cleanup"
 alias update-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 
 alias tm="tmux new-session -A"
