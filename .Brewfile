@@ -47,6 +47,3 @@ brew "kubectx"
 brew "gpg2"
 brew "gnupg"
 brew "pinentry-mac"
-
-cask "alacritty"
-cask "rectangle"
