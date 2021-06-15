@@ -50,5 +50,13 @@
 [include]
     path = config-personal
 
-[includeIf "gitdir:~/git/transferwise/"]
-    path = config-transferwise
+[includeIf "gitdir:~/git/wise/"]
+    path = config-wise
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = Ivan Giacomelli
+	email = ivan.giacomelli@transferwise.com

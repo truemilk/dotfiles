@@ -102,6 +102,7 @@ fi
 if which pyenv > /dev/null; then
     export PYENV_ROOT=$HOME/.pyenv
     export PATH=$PYENV_ROOT/bin:$PATH
+    eval "$(pyenv init --path)"
     eval "$(pyenv init -)"
     if which pyenv-virtualenv-init > /dev/null; then
         eval "$(pyenv virtualenv-init -)";
@@ -119,10 +120,10 @@ if [ -d $HOME/.sdkman ]; then
     [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
 
-if which jenv > /dev/null; then
-    export PATH="$HOME/.jenv/bin:$PATH"
-    eval "$(jenv init -)"
-fi
+#if which jenv > /dev/null; then
+#    export PATH="$HOME/.jenv/bin:$PATH"
+#    eval "$(jenv init -)"
+#fi
 
 if which fzf > /dev/null; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
