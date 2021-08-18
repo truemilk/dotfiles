@@ -2,7 +2,7 @@ bindkey -e
 export KEYTIMEOUT=1
 
 HISTFILE="$HOME/.zhistory"
-HISTSIZE=100000
+HISTSIZE=999999
 SAVEHIST=$HISTSIZE
 setopt BANG_HIST
 setopt EXTENDED_HISTORY
@@ -127,7 +127,7 @@ fi
 
 if which fzf > /dev/null; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    export FZF_DEFAULT_OPTS='--height 50% --layout=reverse --border horizontal  --inline-info'
+    export FZF_DEFAULT_OPTS='--height 60% --reverse --border rounded --info inline'
     export FZF_CTRL_R_OPTS="-i"
     export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
     if which fd > /dev/null; then
@@ -146,7 +146,7 @@ fi
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
-export GPG_TTY=$TTY
+export GPG_TTY=$(tty)
 
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
