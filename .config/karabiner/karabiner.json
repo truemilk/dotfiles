@@ -1,7 +1,7 @@
 {
     "global": {
         "check_for_updates_on_startup": true,
-        "show_in_menu_bar": true,
+        "show_in_menu_bar": false,
         "show_profile_name_in_menu_bar": false
     },
     "profiles": [
@@ -42,14 +42,13 @@
                         ]
                     },
                     {
-                        "description": "MX Master BUTTON 5",
+                        "description": "MX Master Buttons",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
                                         "identifiers": [
                                             {
-                                                "description": "MX Master 3",
                                                 "product_id": 45091,
                                                 "vendor_id": 1133
                                             }
@@ -58,32 +57,23 @@
                                     }
                                 ],
                                 "from": {
-                                    "pointing_button": "button5",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "pointing_button": "button5"
                                 },
                                 "to": [
                                     {
                                         "key_code": "left_arrow",
-                                        "modifiers": ["left_command"]
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "MX Master BUTTON 4",
-                        "manipulators": [
+                            },
                             {
                                 "conditions": [
                                     {
                                         "identifiers": [
                                             {
-                                                "description": "MX Master 3",
                                                 "product_id": 45091,
                                                 "vendor_id": 1133
                                             }
@@ -92,17 +82,14 @@
                                     }
                                 ],
                                 "from": {
-                                    "pointing_button": "button4",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                    "pointing_button": "button4"
                                 },
                                 "to": [
                                     {
                                         "key_code": "right_arrow",
-                                        "modifiers": ["left_command"]
+                                        "modifiers": [
+                                            "left_command"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -162,18 +149,7 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": [
-                        {
-                            "from": {
-                                "pointing_button": "button4"
-                            },
-                            "to": [
-                                {
-                                    "key_code": "left_command"
-                                }
-                            ]
-                        }
-                    ]
+                    "simple_modifications": []
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
