@@ -16,6 +16,7 @@ brew "wget"
 brew "httpie"
 brew "tree"
 brew "jq"
+brew "bat"
 
 brew "vim"
 brew "neovim"
