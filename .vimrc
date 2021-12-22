@@ -54,7 +54,7 @@ endif
 
 set wildmenu
 set showmatch
-set incsearch
+set is hls
 
 set autoindent
 filetype plugin indent on
