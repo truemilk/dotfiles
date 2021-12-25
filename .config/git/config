@@ -15,6 +15,9 @@
 [color "diff"]
     whitespace = red reverse
 
+[fetch]
+    prune = true
+
 [push]
     default = current
 

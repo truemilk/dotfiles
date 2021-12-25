@@ -1,24 +1,18 @@
 [alias]
+
     alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /|sort
+
     ls = log --all --graph --decorate
     ll = log --all --graph --decorate --numstat --pretty=fuller --show-signature
-    up = pull
-    co = checkout
-    cob = checkout -b
-    pu = push -u
-    ri = rebase -i
-    b = branch --all -vv
-    s = status -s
-    ss = status
-    del = branch -D
-    br = branch --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    lg = log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(green)(%cr) [%an]\" --abbrev-commit -20
+    br = branch --all -vv --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+    df = !git diff --word-diff=color
+
     save = !git add -A && git commit -m 'commit save point'
     undo = reset HEAD~1 --mixed
     undocommit = reset --soft HEAD~1
     res = !git reset --hard
-    done = !git push origin HEAD
-    lg = log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(green)(%cr) [%an]\" --abbrev-commit -50
+    done = !git push -u origin HEAD
     count = rev-list --count HEAD
     countall = rev-list --count --all
     firstcommit = rev-list --max-parents=0 HEAD
-    df = !git diff --word-diff=color
