@@ -4,8 +4,9 @@
 
     ls = log --all --graph --decorate
     ll = log --all --graph --decorate --numstat --pretty=fuller --show-signature
-    lg = log --pretty=format:\"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(green)(%cr) [%an]\" --abbrev-commit -20
-    br = branch --all -vv --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(contents:subject) %(color:green)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+
+    lg = log --pretty=format:'%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(green)(%cr) [%an]' --abbrev-commit -30
+    br = branch --all -vv --format='%(HEAD) %(if)%(upstream)%(then)%(color:bold green)%(else)%(if)%(push)%(then)%(color:yellow)%(else)%(color:red)%(end)%(end)%(refname:short)%(color:reset) - %(contents:subject) %(color:magenta)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
     df = !git diff --word-diff=color
 
     save = !git add -A && git commit -m 'commit save point'
@@ -16,3 +17,7 @@
     count = rev-list --count HEAD
     countall = rev-list --count --all
     firstcommit = rev-list --max-parents=0 HEAD
+
+
+    # br = branch --all -vv --format='%(HEAD) %(color:red)%(refname:short) %(if)%(upstream)%(then)%(color:bold green)u:%(upstream:short) %(end)%(color:reset)- %(contents:subject) %(color:magenta)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+
