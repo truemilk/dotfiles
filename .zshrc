@@ -152,4 +152,14 @@ gpg-connect-agent updatestartuptty /bye > /dev/null
 
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
+function gdub() {
+    git fetch --all --prune;
+    for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}');
+    do
+        git branch -D $branch;
+    done;
+}
+
+export TELEPORT_USE_LOCAL_SSH_AGENT=false
+
 eval "$(starship init zsh)"
