@@ -70,7 +70,6 @@ alias tml="tmux list-sessions"
 
 tma() {
     if (( $# != 1 )); then
-        #tmux attach-session
         echo 'I need a session name!'
     else
         tmux attach-session -t $1
@@ -79,7 +78,6 @@ tma() {
 
 tmn() {
     if (( $# != 1 )); then
-        #tmux new-session
         echo 'I need a session name!'
     else
         tmux new-session -s $1
