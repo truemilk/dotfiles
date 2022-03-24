@@ -1,7 +1,7 @@
 [user]
     name = Ivan Giacomelli
     email = ivan.giacomelli@transferwise.com
-    signingkey = 914EEA0A78507B9D 
+    signingkey = C58EB08C77EB34FEEBBF3DC9B7473CB57E1875FA
 
 [commit]
     gpgsign = true
