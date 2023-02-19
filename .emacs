@@ -178,6 +178,9 @@
   (which-key-mode)
   )
 
+;(use-package magit
+;  :bind (("C-x g" . magit-status)
+;         ("C-x C-g" . magit-status)))
 
 ;(use-package org-bullets
 ;  :hook (org-mode . org-bullets-mode))
