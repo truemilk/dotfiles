@@ -38,5 +38,3 @@ brew "gnupg"
 brew "pinentry-mac"
 brew "fx"
 brew "tig"
-
-cask "alacritty"
