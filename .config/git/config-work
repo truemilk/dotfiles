@@ -1,7 +1,14 @@
 [user]
     name = Ivan Giacomelli
-    email = ivan.giacomelli@transferwise.com
-    signingkey = C58EB08C77EB34FEEBBF3DC9B7473CB57E1875FA
+    email = ivan.giacomelli@wise.com
+    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAECGDYPXCiaMbco1hNHk3VJAjXuuaIKvSI86rak9zlW
+
+[gpg]
+    format = ssh
+
+[gpg "ssh"]
+    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [commit]
     gpgsign = true
+
