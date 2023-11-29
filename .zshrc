@@ -66,7 +66,7 @@ alias h1g="history 1 | grep --color"
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
-alias update-brew="brew autoremove && brew update && brew upgrade && brew cleanup"
+#alias update-brew="brew autoremove && brew update && brew upgrade && brew cleanup"
 alias update-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 
 alias tm="tmux new-session -A"
@@ -92,7 +92,7 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
-#[ -d $HOME/.cargo ] && export PATH=$HOME/.cargo/bin:$PATH
+[ -d $HOME/.cargo ] && export PATH=$HOME/.cargo/bin:$PATH
 
 if [ -d $HOME/go ]; then
     export GOPATH=$HOME/go
@@ -126,6 +126,10 @@ fi
 #    export PATH="$HOME/.jenv/bin:$PATH"
 #    eval "$(jenv init -)"
 #fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if which fzf > /dev/null; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -164,5 +168,3 @@ function gdub() {
 
 eval "$(starship init zsh)"
 
-# added by Snowflake SnowSQL installer v1.2
-export PATH=/Users/ivan.giacomelli/Applications/SnowSQL.app/Contents/MacOS:$PATH

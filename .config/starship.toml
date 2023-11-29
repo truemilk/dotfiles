@@ -4,4 +4,9 @@ truncation_symbol = "…/"
 truncate_to_repo = true
 
 [git_branch]
+symbol = "git "
 always_show_remote = true
+
+[git_metrics]
+added_style = 'bold blue'
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '

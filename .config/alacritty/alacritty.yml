@@ -20,7 +20,7 @@ font:
   bold_italic:
     family: "Fira Code"
     style: Bold Italic
-  size: 15
+  size: 14
   AppleFontSmooting: true
 
 draw_bold_text_with_bright_colors: true
