@@ -1,11 +1,12 @@
 [directory]
+truncation_length = 5
 truncation_symbol = "…/"
+truncate_to_repo = true
 
 [git_branch]
+symbol = "git "
 always_show_remote = true
 
-#[git_status]
-#ahead = "⇡${count}"
-#diverged = "⇕⇡${ahead_count}⇣${behind_count}"
-#behind = "⇣${count}"
-#staged = '[++\($count\)](green)'
+[git_metrics]
+added_style = 'bold blue'
+format = '[+$added]($added_style)/[-$deleted]($deleted_style) '

@@ -36,7 +36,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 export CLICOLOR=1
 export LSCOLORS=GxFxcxdxbxegedabagacad
 
-if which vim > /dev/null; then
+if which nvim > /dev/null; then
     export EDITOR="vim"
 else
     export EDITOR="nano"
@@ -56,14 +56,18 @@ alias -g F="| fzf"
 alias -g C="| pbcopy"
 alias -g V="| vim -"
 
+alias curl="curl -s"
+
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
+
+alias h1g="history 1 | grep --color"
 
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="v ~/.zshrc && zreload"
 
-alias update-brew="brew update && brew upgrade && brew cleanup"
-#alias update-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
+#alias update-brew="brew autoremove && brew update && brew upgrade && brew cleanup"
+alias update-vim="vim '+PlugUpgrade' '+PlugUpdate' '+PlugClean!' '+qall'"
 
 alias tm="tmux new-session -A"
 alias tml="tmux list-sessions"
@@ -107,25 +111,29 @@ if which pyenv > /dev/null; then
     fi
 fi
 
-[ -d $HOME/.poetry ] && export PATH=$HOME/.poetry/bin:$PATH
+#[ -d $HOME/.poetry ] && export PATH=$HOME/.poetry/bin:$PATH
 
 if which pipenv > /dev/null; then
     export PIPENV_VENV_IN_PROJECT=1
 fi
 
-if [ -d $HOME/.sdkman ]; then
-    export SDKMAN_DIR="$HOME/.sdkman"
-    [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-fi
+#if [ -d $HOME/.sdkman ]; then
+#    export SDKMAN_DIR="$HOME/.sdkman"
+#    [ -s "$HOME/.sdkman/bin/sdkman-init.sh" ] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+#fi
 
 #if which jenv > /dev/null; then
 #    export PATH="$HOME/.jenv/bin:$PATH"
 #    eval "$(jenv init -)"
 #fi
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 if which fzf > /dev/null; then
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    export FZF_DEFAULT_OPTS='--height 60% --reverse --border rounded --info inline'
+    export FZF_DEFAULT_OPTS='--height 50% --reverse --info inline --border rounded'
     export FZF_CTRL_R_OPTS="-i"
     export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
     if which fd > /dev/null; then
@@ -144,9 +152,9 @@ fi
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
-export GPG_TTY=$(tty)
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpg-connect-agent updatestartuptty /bye > /dev/null
+#export GPG_TTY=$(tty)
+#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#gpg-connect-agent updatestartuptty /bye > /dev/null
 
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
@@ -158,6 +166,5 @@ function gdub() {
     done;
 }
 
-export TELEPORT_USE_LOCAL_SSH_AGENT=false
-
 eval "$(starship init zsh)"
+

@@ -33,6 +33,7 @@
 **/.java-version
 **/.sdkmanrc
 **/.projectile
+**/.history
 
 # python stuff
 **/venv
