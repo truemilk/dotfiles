@@ -21,6 +21,7 @@ brew "ruff"
 
 # Editor
 brew "vim"
+brew "neovim"
 
 # Fonts
 cask "font-monaspace"
