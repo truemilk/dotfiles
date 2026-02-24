@@ -6,7 +6,7 @@ Chezmoi managed dotfiles.
 
 On a new machine:
 
-- Install Homebrew
-- Install chezmoi via `brew`
-- Run `$ chezmoi init --apply truemilk`
-- Run `$ brew bundle --global`
+- `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+- `brew install chezmoi`
+- `chezmoi init --apply truemilk`
+- `brew bundle --global`
