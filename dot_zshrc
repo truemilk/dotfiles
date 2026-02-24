@@ -33,8 +33,6 @@ alias curl="curl -s"
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
 
-alias hist="history 1 | grep --color -E"
-
 if command -v nvim &> /dev/null; then
   export EDITOR=nvim
 else
