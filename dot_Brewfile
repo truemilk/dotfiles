@@ -1,0 +1,27 @@
+# Shell
+brew "fish"
+brew "starship"
+brew "atuin"
+
+# Tools
+brew "fzf"
+brew "bat"
+brew "ripgrep"
+brew "wget"
+brew "jq"
+brew "yq"
+brew "eza"
+
+# Dev
+brew "git"
+brew "git-delta"
+brew "gh"
+brew "uv"
+brew "ruff"
+
+# Editor
+brew "vim"
+
+# Fonts
+cask "font-monaspace"
+cask "font-meslo-lg-nerd-font"

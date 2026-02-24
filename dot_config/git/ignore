@@ -1,0 +1,71 @@
+# General
+**/.DS_Store
+**/.AppleDouble
+**/.LSOverride
+
+# Thumbnails
+**/._*
+
+# Files that might appear in the root of a volume
+**/.DocumentRevisions-V100
+**/.fseventsd
+**/.Spotlight-V100
+**/.TemporaryItems
+**/.Trashes
+**/.VolumeIcon.icns
+**/.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+**/.AppleDB
+**/.AppleDesktop
+**/Network Trash Folder
+**/Temporary Items
+**/.apdisk
+
+# Tools / Editors / IDEs
+**/*.sublime-workspace
+**/*.sublime-project
+**/.vscode
+**/*.code-workspace
+**/.idea
+**/.vim # COC
+**/.python-version
+**/.java-version
+**/.sdkmanrc
+**/.projectile
+**/.history
+
+# python stuff
+**/venv
+**/.venv
+**/__pycache__
+**/.pytest_cache
+
+# Terraform
+**/.terraform
+**/terraform.tfstate
+**/terraform.tfstate.backup
+
+# Direnv
+**/.direnv
+**/.envrc
+
+# Aider
+**/.aider*
+**/.env
+
+# Elixir Tooling
+**/.elixir_ls
+**/.lexical
+
+# Claude
+**/.claude
+**/CLAUDE.local.md
+**/CLAUDE.md
+**/docs/plans
+
+**/.opencode
+**/AGENTS.md
+
+# Worktrees
+**/.worktrees

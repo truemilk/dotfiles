@@ -1,0 +1,31 @@
+font-size = 15
+font-family = "MesloLGS Nerd Font Mono"
+
+window-inherit-working-directory = false
+macos-titlebar-style = tabs
+macos-option-as-alt = true
+auto-update = check
+
+theme = vague
+custom-shader = ~/.config/ghostty/shaders/cursor_smear.glsl
+macos-icon = custom-style
+macos-icon-frame = aluminum
+macos-icon-ghost-color = #ffffff
+macos-icon-screen-color = #000000
+maximize = true
+
+mouse-hide-while-typing = true
+unfocused-split-opacity = 0.7
+split-divider-color = #444444
+
+keybind = super+enter=new_split:right
+
+keybind = super+h=goto_split:left
+keybind = super+l=goto_split:right
+keybind = super+k=goto_split:up
+keybind = super+j=goto_split:down
+
+keybind = ctrl+super+h=resize_split:left,50
+keybind = ctrl+super+l=resize_split:right,50
+keybind = ctrl+super+k=resize_split:up,50
+keybind = ctrl+super+j=resize_split:down,50
