@@ -47,12 +47,11 @@
 
 [user]
     name = Ivan Giacomelli
-{{ if eq .chezmoi.hostname "Melavoro" }}
-    email = ivan.giacomelli@lorum.com
-{{ else }}
     email = ivan@nopsled.it
-{{ end }}
     signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFgidANFo/VdM+CDNgwp+xympHpbTj+iyQuzYPeu02x4
+
+[includeIf "hasconfig:remote.*.url:git@github.com:fusebank/*"]
+    path = config-fusebank
 
 [gpg]
     format = ssh
