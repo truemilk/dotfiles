@@ -50,13 +50,14 @@
 **/.direnv
 **/.envrc
 
-# Aider
-**/.aider*
-**/.env
-
 # Elixir Tooling
 **/.elixir_ls
 **/.lexical
+
+{{ if eq .chezmoi.hostname "Melavoro" }}
+# Aider
+**/.aider*
+**/.env
 
 # Claude
 **/.claude
@@ -64,8 +65,12 @@
 **/CLAUDE.md
 **/docs/plans
 
+# Opencode
 **/.opencode
+
+# Agents
 **/AGENTS.md
 
 # Worktrees
 **/.worktrees
+{{ end }}
