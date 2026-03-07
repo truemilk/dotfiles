@@ -1,0 +1,45 @@
+theme = "tokyonight"
+
+[editor]
+line-number = "relative"
+#rulers = [80, 120]
+mouse = true
+auto-completion=true
+auto-save=true
+auto-format=true
+color-modes = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.statusline]
+left = ["mode", "spinner", "file-modification-indicator", "read-only-indicator"]
+center = ["file-name"]
+right = ["diagnostics", "register", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
+separator = "│"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+
+[editor.lsp]
+enable=true
+auto-signature-help=true
+display-messages = true
+
+[keys.normal]
+# Use system clipboard
+y = "yank_main_selection_to_clipboard"
+p = "paste_clipboard_before"
+C-u = ["half_page_up", "align_view_center"]
+C-d = ["half_page_down", "align_view_center"]

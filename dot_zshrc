@@ -33,17 +33,14 @@ alias curl="curl -s"
 alias ..='cd ..'
 alias ...='cd .. && cd ..'
 
+alias yy=yazi
+alias gg=lazygit
+
 if command -v nvim &> /dev/null; then
   export EDITOR=nvim
 else
   export EDITOR=vim
 fi
-alias edit=$EDITOR
-
-alias nv=nvim
-alias lg=lazygit
-alias oc=opencode
-alias tf=terraform
 
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
 alias zshrc="$EDITOR ~/.zshrc && zreload"

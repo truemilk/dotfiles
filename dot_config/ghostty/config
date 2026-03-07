@@ -6,7 +6,7 @@ macos-titlebar-style = tabs
 macos-option-as-alt = true
 auto-update = check
 
-theme = vague
+theme = TokyoNight Night
 custom-shader = ~/.config/ghostty/shaders/cursor_smear.glsl
 macos-icon = custom-style
 macos-icon-frame = aluminum
@@ -18,14 +18,17 @@ mouse-hide-while-typing = true
 unfocused-split-opacity = 0.7
 split-divider-color = #444444
 
-keybind = super+enter=new_split:right
-
 keybind = super+h=goto_split:left
 keybind = super+l=goto_split:right
 keybind = super+k=goto_split:up
 keybind = super+j=goto_split:down
 
-keybind = ctrl+super+h=resize_split:left,50
-keybind = ctrl+super+l=resize_split:right,50
-keybind = ctrl+super+k=resize_split:up,50
-keybind = ctrl+super+j=resize_split:down,50
+keybind = ctrl+super+h=resize_split:left,100
+keybind = ctrl+super+l=resize_split:right,100
+keybind = ctrl+super+k=resize_split:up,100
+keybind = ctrl+super+j=resize_split:down,100
+
+keybind = shift+super+h=new_split:left
+keybind = shift+super+l=new_split:right
+keybind = shift+super+k=new_split:up
+keybind = shift+super+j=new_split:down
