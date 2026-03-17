@@ -5,9 +5,13 @@ line-number = "relative"
 #rulers = [80, 120]
 mouse = true
 auto-completion=true
-auto-save=true
 auto-format=true
 color-modes = true
+cursorline = true
+bufferline = "always"
+
+[editor.indent-guides]
+render = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -26,6 +30,10 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+
 [editor.whitespace.characters]
 space = "·"
 nbsp = "⍽"
@@ -38,8 +46,11 @@ auto-signature-help=true
 display-messages = true
 
 [keys.normal]
+S-l = ":buffer-next"
+S-h = ":buffer-previous"
 # Use system clipboard
 y = "yank_main_selection_to_clipboard"
 p = "paste_clipboard_before"
 C-u = ["half_page_up", "align_view_center"]
 C-d = ["half_page_down", "align_view_center"]
+C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]

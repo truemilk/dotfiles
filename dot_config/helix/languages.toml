@@ -1,12 +1,17 @@
-#[[language]]
-#name = "hcl"
-#language-server = { command = 'terraform-ls', args = [ "serve" ], language-id = "terraform" }
-#auto-format = true
+[[language]]
+name = "hcl"
+language-servers = [ "terraform-ls" ]
+language-id = "terraform"
+formatter = { command = "terraform" , args = ["fmt", "-"] }
 
-#[[language]]
-#name = "tfvars"
-#language-server = { command = 'terraform-ls', args = [ "serve" ], language-id = "terraform-vars" }
-#auto-format = true
+[[language]]
+name = "tfvars"
+language-servers = [ "terraform-ls" ]
+language-id = "terraform-vars"
+
+[language-server.terraform-ls]
+command = "terraform-ls"
+args = ["serve"]
 
 [[language]]
 name = "rust"
@@ -28,6 +33,7 @@ roots = [
 command = "rust-analyzer"
 
 [language-server.rust-analyzer.config]
+check.command = "clippy"
 inlayHints.bindingModeHints.enable = false
 inlayHints.closingBraceHints.minLines = 10
 inlayHints.closureReturnTypeHints.enable = "with_block"
