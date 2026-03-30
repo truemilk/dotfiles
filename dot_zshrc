@@ -68,7 +68,6 @@ if type brew &>/dev/null; then
     autoload -Uz compinit
     compinit
 fi
-#zstyle ':completion:*' menu yes select
 
 [ -d $HOME/.opencode/bin ] && export PATH=$HOME/.opencode/bin:$PATH
 [ -d $HOME/.cargo/ ] && . $HOME/.cargo/env
@@ -78,9 +77,18 @@ fi
 
 export HOMEBREW_NO_ENV_HINTS=1
 
-eval "$(atuin init zsh --disable-up-arrow)"
-
-# eval "$(starship init zsh)"
+if which fzf > /dev/null; then
+    eval "$(fzf --zsh)"
+    export FZF_DEFAULT_OPTS='--height 30% --reverse --info inline --border rounded'
+    export FZF_CTRL_R_OPTS="--height 40% --preview 'echo {2..} | bat --color=always -pl sh' --preview-window 'wrap,down,3' --preview-border rounded"
+    export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+    if which fd > /dev/null; then
+        export FZF_DEFAULT_COMMAND="fd . $HOME"
+        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+        bindkey "ç" fzf-cd-widget
+        export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+    fi
+fi
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"

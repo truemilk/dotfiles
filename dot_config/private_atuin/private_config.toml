@@ -66,7 +66,7 @@ search_mode_shell_up_key_binding = "fuzzy"
 ## which style to use
 ## possible values: auto, full, compact
 # style = "auto"
-style = "compact"
+style = "auto"
 
 ## the maximum number of lines the interface should take up
 ## set it to 0 to always go full screen
@@ -295,3 +295,7 @@ name = "default"
 ## The "workspace" mode is skipped when not in a workspace or workspaces = false.
 ## Default filter mode can be overridden with the filter_mode setting.
 # filters = [ "global", "host", "session", "session-preload", "workspace", "directory" ]
+
+
+[ai]
+enabled = true

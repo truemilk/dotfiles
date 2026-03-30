@@ -6,7 +6,7 @@ macos-titlebar-style = tabs
 macos-option-as-alt = true
 auto-update = check
 
-theme = Vague
+theme = TokyoNight Night
 custom-shader = ~/.config/ghostty/shaders/cursor_smear.glsl
 macos-icon = custom-style
 macos-icon-frame = aluminum
