@@ -4,7 +4,6 @@ brew "starship"
 brew "atuin"
 
 # Tools
-brew "helix"
 brew "fzf"
 brew "bat"
 brew "ripgrep"
@@ -12,6 +11,7 @@ brew "wget"
 brew "jq"
 brew "yq"
 brew "eza"
+brew "yazi"
 
 # Dev
 brew "git"
@@ -19,10 +19,15 @@ brew "git-delta"
 brew "gh"
 brew "uv"
 brew "ruff"
+brew "lazygit"
 
 # Editor
 brew "vim"
 brew "neovim"
+brew "helix"
+
+# Terminal
+cask "kitty"
 
 # Fonts
 cask "font-monaspace"
