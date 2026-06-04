@@ -27,11 +27,13 @@
 (require 'package)
 (setq package-archives
       '(("gnu-elpa"     . "https://elpa.gnu.org/packages/")
+        ("nongnu"       . "https://elpa.nongnu.org/nongnu/")
         ("melpa-stable" . "https://stable.melpa.org/packages/")
         ("melpa"        . "https://melpa.org/packages/")
         )
       package-archive-priorities
       '(("gnu-elpa"     . 10)
+        ("nongnu"       . 8)
         ("melpa-stable" . 5)
         ("melpa"        . 0)
 ))
@@ -41,6 +43,13 @@
   (package-install 'use-package))
 (eval-when-compile (require 'use-package))
 (setq use-package-always-ensure t)
+
+;; Import the shell PATH (incl. mise shims) so GUI Emacs can find CLI
+;; tools such as terraform-ls. Must run before any LSP server launches.
+(use-package exec-path-from-shell
+  :config
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize)))
 
 (tooltip-mode -1)
 (setq ring-bell-function 'ignore)
@@ -57,7 +66,8 @@
 )
 
 (when (not (window-system))
-      (menu-bar-mode -1))
+      (menu-bar-mode -1)
+      (load-theme 'modus-vivendi t)) ; dark theme for terminal; matches kitty's bg
 
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -108,33 +118,6 @@
 (setq mac-right-command-modifier 'super)
 (setq mac-right-option-modifier 'meta)
 
-;; (global-set-key (kbd "s-<right>") 'move-end-of-line)
-(global-set-key (kbd "s-<right>") 'end-of-visual-line)
-;; (global-set-key (kbd "S-s-<right>") (kbd "C-S-e"))
-
-(global-set-key (kbd "s-<left>") 'back-to-indentation)
-;; (global-set-key (kbd "s-<left>") 'beginning-of-visual-line)
-(global-set-key (kbd "S-s-<left>") (kbd "M-S-m"))
-
-(global-set-key (kbd "s-<up>") 'beginning-of-buffer)
-(global-set-key (kbd "s-<down>") 'end-of-buffer)
-
-(global-set-key (kbd "s-l") 'goto-line)
-
-(global-set-key (kbd "s-a") 'mark-whole-buffer)       ;; select all
-
-(global-set-key (kbd "s-s") 'save-buffer)             ;; save
-(global-set-key (kbd "s-S") 'write-file)              ;; save as
-
-(global-set-key (kbd "s-w") 'kill-this-buffer)        ;; close
-(global-set-key (kbd "s-q") 'save-buffers-kill-emacs) ;; quit
-
-(global-set-key (kbd "s-z") 'undo)
-
-(global-set-key (kbd "s-]") 'other-window)
-(global-set-key (kbd "s-[") 'other-window)
-
-
 (defun create-dir-if-missing (dir)
   (if (not (file-directory-p dir))
       (make-directory dir)))
@@ -143,11 +126,14 @@
 ;  (if (not (file-exist-p file))
                                         ;      (write-region "" nil file nil 0)))
 
-;(use-package display-line-numbers
-;  :ensure nil
-;  :custom
-;  (display-line-numbers-grow-only t)
-;  (display-line-numbers-width-start t))
+(use-package display-line-numbers
+  :ensure nil
+  :custom
+  (display-line-numbers-type 'relative)
+  (display-line-numbers-grow-only t)
+  (display-line-numbers-width-start t)
+  :config
+  (global-display-line-numbers-mode 1))
 
 ;;(unless (version< emacs-version "27")
 ;;  (use-package tab-line
@@ -178,17 +164,105 @@
   (which-key-mode)
   )
 
-;(use-package magit
-;  :bind (("C-x g" . magit-status)
-;         ("C-x C-g" . magit-status)))
+;;
+;; LSP + Terraform support
+;;
+
+;; Throughput tweak recommended by lsp-mode (gc-cons-threshold is raised above).
+(setq read-process-output-max (* 1024 1024))
+
+(use-package terraform-mode
+  :mode ("\\.tf\\'" "\\.tfvars\\'"))
+
+(use-package lsp-mode
+  :init
+  ;; Pin the keymap prefix so it doesn't clobber the s-l (goto-line) binding.
+  (setq lsp-keymap-prefix "C-c l")
+  :custom
+  ;; We drive completion through corfu/capf, not company; this also silences
+  ;; the "Unable to autoconfigure company-mode" warning.
+  (lsp-completion-provider :none)
+  :hook (terraform-mode . lsp-deferred)
+  :commands (lsp lsp-deferred))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode)
+
+;;
+;; Modern in-buffer completion (corfu)
+;;
+
+(use-package corfu
+  :init
+  (global-corfu-mode)
+  :custom
+  (corfu-auto t)
+  (corfu-auto-delay 0.2)
+  (corfu-auto-prefix 2)
+  (corfu-cycle t)
+  :config
+  (corfu-popupinfo-mode))
+
+(use-package corfu-terminal
+  :after corfu
+  :config
+  (unless (display-graphic-p)
+    (corfu-terminal-mode +1)))
+
+(use-package kind-icon
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default)
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+(use-package cape
+  :init
+  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+  (add-to-list 'completion-at-point-functions #'cape-file))
+
+(use-package orderless
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion)))))
+
+;; lsp-mode defaults to the `flex' style; make it use orderless too.
+(add-hook 'lsp-completion-mode-hook
+          (lambda ()
+            (setf (alist-get 'styles
+                             (alist-get 'lsp-capf completion-category-defaults))
+                  '(orderless))))
+
+(use-package magit
+  :bind (("C-x g"   . magit-status)
+         ("C-x C-g" . magit-status))
+  :custom
+  (magit-diff-refine-hunk 'all)             ; word-level highlighting in diffs
+  (magit-save-repository-buffers 'dontask)) ; auto-save before magit ops
+
+;;
+;; Modern file explorer (dirvish)
+;;
+
+(use-package nerd-icons)
+
+(use-package dirvish
+  :init
+  ;; This dirvish build keeps its extensions in a subdir that isn't on the
+  ;; load-path; add it so dirvish-side and the nerd-icons attribute can load.
+  (add-to-list 'load-path
+               (expand-file-name "extensions"
+                                 (file-name-directory (locate-library "dirvish"))))
+  (dirvish-override-dired-mode)          ; dirvish takes over dired everywhere
+  :custom
+  (dirvish-attributes '(nerd-icons file-size))
+  :config
+  (require 'dirvish-side)                ; defines dirvish-side for the C-c f binding
+  :bind (("C-c f" . dirvish-side)        ; toggle the sidebar tree
+         ("C-x d" . dirvish)))           ; full-frame dirvish w/ preview pane
 
 ;(use-package org-bullets
 ;  :hook (org-mode . org-bullets-mode))
-
-(use-package tokyonight-themes
-  :vc (:url "https://github.com/xuchengpeng/tokyonight-themes")
-  :config
-  (load-theme 'tokyonight-night :no-confirm))
 
 ;;
 ;; org-mode configuration

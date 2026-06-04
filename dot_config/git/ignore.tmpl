@@ -50,31 +50,20 @@
 **/.direnv
 **/.envrc
 
+**/.env
+
 # Elixir Tooling
 **/.elixir_ls
 **/.lexical
 
 {{ if eq .chezmoi.hostname "Melavoro" }}
-# Aider
 **/.aider*
-**/.env
-
-# Claude
 **/.claude
-**/CLAUDE.local.md
-**/CLAUDE.md
 **/docs/plans
 **/docs/superpowers
-
-# Opencode
 **/.opencode
-
-# Agents
-**/AGENTS.md
+**/.pi
+{{ end }}
 
 # Worktrees
 **/.worktrees
-
-# Copilot
-.github/copilot-instructions.md
-{{ end }}

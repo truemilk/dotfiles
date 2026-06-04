@@ -36,10 +36,12 @@ alias ...='cd .. && cd ..'
 alias yy=yazi
 alias gg=lazygit
 
-if command -v nvim &> /dev/null; then
-  export EDITOR=nvim
+alias ask="pi --provider openrouter --model 'openai/gpt-5.4-nano' -p "
+
+if type hx &>/dev/null; then
+    export EDITOR=hx
 else
-  export EDITOR=vim
+    export EDITOR=vim
 fi
 
 alias zreload="echo 'Reloading zsh...' && source ~/.zshrc"
@@ -72,23 +74,32 @@ fi
 [ -d $HOME/.opencode/bin ] && export PATH=$HOME/.opencode/bin:$PATH
 [ -d $HOME/.cargo/ ] && . $HOME/.cargo/env
 
+if type /opt/homebrew/bin/go &>/dev/null; then
+    export GOPATH=$HOME/go
+    export GOROOT=/usr/local/opt/go/libexec
+    export PATH=$GOPATH/bin:$PATH
+    export PATH=$GOROOT/bin:$PATH
+fi
+
 [ -d $HOME/.local/bin ] && export PATH=$HOME/.local/bin:$PATH
 [ -d $HOME/bin ] && export PATH=$HOME/bin:$PATH
 
 export HOMEBREW_NO_ENV_HINTS=1
 
-if which fzf > /dev/null; then
-    eval "$(fzf --zsh)"
-    export FZF_DEFAULT_OPTS='--height 30% --reverse --info inline --border rounded'
-    export FZF_CTRL_R_OPTS="--height 40% --preview 'echo {2..} | bat --color=always -pl sh' --preview-window 'wrap,down,3' --preview-border rounded"
-    export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-    if which fd > /dev/null; then
-        export FZF_DEFAULT_COMMAND="fd . $HOME"
-        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-        bindkey "ç" fzf-cd-widget
-        export FZF_ALT_C_COMMAND="fd -t d . $HOME"
-    fi
-fi
+#if which fzf > /dev/null; then
+#    eval "$(fzf --zsh)"
+#    export FZF_DEFAULT_OPTS='--height 30% --reverse --info inline --border rounded'
+#    export FZF_CTRL_R_OPTS="--height 40% --preview 'echo {2..} | bat --color=always -pl sh' --preview-window 'wrap,down,3' --preview-border rounded"
+#    export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+#    if which fd > /dev/null; then
+#        export FZF_DEFAULT_COMMAND="fd . $HOME"
+#        export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+#        bindkey "ç" fzf-cd-widget
+#        export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+#    fi
+#fi
+
+eval "$(atuin init zsh --disable-up-arrow)"
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"

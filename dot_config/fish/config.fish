@@ -4,21 +4,28 @@ fish_add_path --move /opt/homebrew/bin /opt/homebrew/sbin
 mise activate fish | source
 fish_add_path --move /opt/homebrew/opt/mise/bin
 
-fish_add_path --move ~/.opencode/bin
+if type -q /opt/homebrew/bin/go
+    set -gx GOPATH $HOME/go
+    set -gx GOROOT /usr/local/opt/go/libexec
+    fish_add_path --move $GOPATH/bin
+    fish_add_path --move $GOROOT/bin
+else
+    echo "Golang is not installed from Homebrew"
+end
+
 fish_add_path --move ~/.cargo/bin
+
 fish_add_path --move ~/.local/bin
 fish_add_path --move ~/bin
 
-if type -q nvim
-    set -gx EDITOR nvim
+if type -q hx
+    set -gx EDITOR hx
 else
     set -gx EDITOR vim
 end
-abbr -a e $EDITOR
 
-abbr -a tf terraform
-abbr -a lg lazygit
-abbr -a oc opencode
+abbr -a gg lazygit
+abbr -a yy yazi
 
 abbr -a la ls -aG
 abbr -a ll ls -laG

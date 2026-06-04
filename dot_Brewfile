@@ -4,6 +4,7 @@ brew "starship"
 brew "atuin"
 
 # Tools
+brew "helix"
 brew "fzf"
 brew "bat"
 brew "ripgrep"

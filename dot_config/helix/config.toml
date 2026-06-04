@@ -1,17 +1,33 @@
-theme = "tokyonight"
+theme = "ayu_dark"
 
 [editor]
 line-number = "relative"
-#rulers = [80, 120]
 mouse = true
-auto-completion=true
-auto-format=true
+auto-completion = true
+auto-format = true
 color-modes = true
 cursorline = true
 bufferline = "always"
+gutters = [
+  "diagnostics",
+  "spacer",
+  "line-numbers",
+  "spacer",
+  "diff",
+]
+scrolloff = 10
+path-completion = true
+preview-completion-insert = false
+popup-border = "all"
+jump-label-alphabet = "fjdkslaghrueiwoqptyvncmbxz"
+end-of-line-diagnostics = "hint"
 
 [editor.indent-guides]
 render = true
+skip-levels = 1
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -22,10 +38,28 @@ select = "underline"
 hidden = false
 
 [editor.statusline]
-left = ["mode", "spinner", "file-modification-indicator", "read-only-indicator"]
-center = ["file-name"]
-right = ["diagnostics", "register", "selections", "position", "file-encoding", "file-line-ending", "file-type"]
-separator = "│"
+left = [
+"mode",
+"spinner",
+"version-control",
+"file-name",
+"read-only-indicator",
+"file-modification-indicator",
+]
+center = []
+right = [
+"diagnostics",
+"workspace-diagnostics",
+"position",
+"total-line-numbers",
+"position-percentage",
+"file-encoding",
+"file-line-ending",
+"file-type",
+"register",
+"selections"
+]
+separator = " "
 mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
@@ -34,23 +68,26 @@ mode.select = "SELECT"
 space = "all"
 tab = "all"
 
-[editor.whitespace.characters]
-space = "·"
-nbsp = "⍽"
-tab = "→"
-newline = "⏎"
-
 [editor.lsp]
-enable=true
-auto-signature-help=true
+enable = true
+auto-signature-help = true
 display-messages = true
+display-inlay-hints = true
+display-signature-help-docs = true
+snippets = true
+goto-reference-include-declaration = true
 
 [keys.normal]
-S-l = ":buffer-next"
-S-h = ":buffer-previous"
-# Use system clipboard
-y = "yank_main_selection_to_clipboard"
-p = "paste_clipboard_before"
 C-u = ["half_page_up", "align_view_center"]
 C-d = ["half_page_down", "align_view_center"]
-C-g = [":new", ":insert-output lazygit", ":buffer-close!", ":redraw"]
+C-r = [":reload"]
+
+[keys.normal.space.o]
+e = [
+  ':sh rm -f /tmp/unique-file',
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/unique-file}',
+  ':redraw',
+]
+g = [":write-all", ":insert-output lazygit >/dev/tty", ":redraw", ":reload-all"]

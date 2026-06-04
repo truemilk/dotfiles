@@ -1,13 +1,59 @@
-command_timeout = 5000
+# Whitelist exactly which modules render. Because this replaces the default
+# `$all`, no language/runtime/service modules (node, python, docker, aws-less
+# cloud tools, etc.) will ever appear — only what's listed below.
+format = """
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$git_metrics\
+$aws\
+$line_break\
+$character"""
 
+# ── Git ──────────────────────────────────────────────────────────────
 [git_branch]
 always_show_remote = true
+symbol = 'git:'
+format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[git_commit]
+commit_hash_length = 7
+only_detached = false   # always show the commit hash, not just when detached
+tag_disabled = false    # show tags pointing at HEAD
+format = '[\($hash$tag\)]($style) '
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+conflicted = '=${count}'
+untracked = '?${count}'
+stashed = '\$${count}'
+modified = '!${count}'
+staged = '+${count}'
+renamed = '»${count}'
+deleted = '✘${count}'
 
 [git_metrics]
-disabled = true
+disabled = false
 added_style = 'bold blue'
+deleted_style = 'bold red'
 format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
 
+# ── AWS ──────────────────────────────────────────────────────────────
+[aws]
+disabled = false
+force_display = true    # show even without active credentials in env
+symbol = 'aws:'
+format = '[$symbol($profile)(\($region\) )(\[$duration\] )]($style)'
+
+# ── Directory (kept so the prompt still shows where you are) ───────────
 [directory]
 truncation_length = 3
 truncation_symbol = ".../"
