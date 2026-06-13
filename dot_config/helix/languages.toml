@@ -1,58 +1,99 @@
+# ───────────────────────────── Terraform / HCL ──────────────────────────────
+# .tf files are detected as `hcl`; .tfvars as `tfvars`. Both share terraform-ls.
 [[language]]
 name = "hcl"
-language-servers = [ "terraform-ls" ]
-language-id = "terraform"
-formatter = { command = "terraform" , args = ["fmt", "-"] }
+language-servers = ["terraform-ls", "tflint"]
+formatter = { command = "terraform", args = ["fmt", "-"] }
+auto-format = true
 
 [[language]]
 name = "tfvars"
-language-servers = [ "terraform-ls" ]
+language-servers = ["terraform-ls"]
 language-id = "terraform-vars"
 
 [language-server.terraform-ls]
 command = "terraform-ls"
 args = ["serve"]
 
+# Run `terraform validate` on save and prefill required arguments in completion.
+[language-server.terraform-ls.config.experimentalFeatures]
+validateOnSave = true
+prefillRequiredFields = true
+
+# tflint as a second LSP -> inline lint diagnostics.
+# Core rules work out of the box; run `tflint --init` in a project to enable
+# provider/ruleset plugins. Comment this out (and drop "tflint" above) if noisy.
+[language-server.tflint]
+command = "tflint"
+args = ["--langserver"]
+
+# ──────────────────────────────────── Go ────────────────────────────────────
+# goimports stays the formatter: it runs gofmt *and* organizes imports on save
+# (gopls' LSP formatting alone does not reorganize imports).
+[[language]]
+name = "go"
+formatter = { command = "goimports" }
+auto-format = true
+
+[language-server.gopls.config]
+usePlaceholders = true   # fill function-signature placeholders on completion
+staticcheck = true       # bundled staticcheck analysis suite (no extra binary)
+
+# Inlay hints — gopls emits none unless explicitly enabled, so the global
+# `display-inlay-hints = true` was a no-op for Go until now.
+[language-server.gopls.config.hints]
+assignVariableTypes = true
+compositeLiteralFields = true
+compositeLiteralTypes = true
+constantValues = true
+functionTypeParameters = true
+parameterNames = true
+rangeVariableTypes = true
+
+# High-signal, low-noise static analyses beyond the defaults.
+[language-server.gopls.config.analyses]
+unusedparams = true
+unusedwrite = true
+nilness = true
+useany = true
+
+# ─────────────────────────────────── Rust ───────────────────────────────────
 [[language]]
 name = "rust"
 auto-format = true
-
-roots = [
-  "Cargo.toml",
-  "Cargo.lock"
-]
-
-[language.auto-pairs]
-'(' = ')'
-'{' = '}'
-'[' = ']'
-'"' = '"'
-'`' = '`'
+roots = ["Cargo.toml", "Cargo.lock"]
 
 [language-server.rust-analyzer]
 command = "rust-analyzer"
 
 [language-server.rust-analyzer.config]
 check.command = "clippy"
+completion.callable.snippets = "fill_arguments"   # auto-fill args on fn completion
 inlayHints.bindingModeHints.enable = false
 inlayHints.closingBraceHints.minLines = 10
+inlayHints.closureCaptureHints.enable = true
 inlayHints.closureReturnTypeHints.enable = "with_block"
 inlayHints.discriminantHints.enable = "fieldless"
 inlayHints.lifetimeElisionHints.enable = "skip_trivial"
 inlayHints.typeHints.hideClosureInitialization = false
 
+# ───────────────────────────── Other formatters ─────────────────────────────
 [[language]]
 name = "toml"
-formatter = { command = "prettier" }
+formatter = { command = "taplo", args = ["format", "-"] }
 auto-format = true
 
 [[language]]
 name = "yaml"
-formatter = { command = "prettier" }
+formatter = { command = 'prettier', args = ["--parser", "yaml"] }
 auto-format = true
 
 [[language]]
-name = "dockerfile"
-file-types = ["Dockerfile", "Dockerfile.lambda"]
+name = "markdown"
+formatter = { command = 'prettier', args = [
+  "--parser",
+  "markdown",
+  "--prose-wrap",
+  "never",
+] }
 auto-format = true
-

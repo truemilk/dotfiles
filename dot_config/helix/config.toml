@@ -8,13 +8,7 @@ auto-format = true
 color-modes = true
 cursorline = true
 bufferline = "always"
-gutters = [
-  "diagnostics",
-  "spacer",
-  "line-numbers",
-  "spacer",
-  "diff",
-]
+gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 scrolloff = 10
 path-completion = true
 preview-completion-insert = false
@@ -34,30 +28,24 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
-[editor.file-picker]
-hidden = false
+#[editor.file-picker]
+#hidden = false
 
 [editor.statusline]
-left = [
-"mode",
-"spinner",
-"version-control",
-"file-name",
-"read-only-indicator",
-"file-modification-indicator",
-]
-center = []
+left = ["mode", "separator", "version-control"]
+center = ["file-name", "read-only-indicator", "file-modification-indicator"]
 right = [
-"diagnostics",
-"workspace-diagnostics",
-"position",
-"total-line-numbers",
-"position-percentage",
-"file-encoding",
-"file-line-ending",
-"file-type",
-"register",
-"selections"
+  "diagnostics",
+  "workspace-diagnostics",
+  "position",
+  "total-line-numbers",
+  "position-percentage",
+  "file-encoding",
+  "file-line-ending",
+  "file-type",
+  "register",
+  "selections",
+  "spinner",
 ]
 separator = " "
 mode.normal = "NORMAL"
@@ -83,11 +71,11 @@ C-d = ["half_page_down", "align_view_center"]
 C-r = [":reload"]
 
 [keys.normal.space.o]
-e = [
+g = [":write-all", ":insert-output lazygit >/dev/tty", ":redraw", ":reload-all"]
+y = [
   ':sh rm -f /tmp/unique-file',
   ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
   ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
   ':open %sh{cat /tmp/unique-file}',
   ':redraw',
 ]
-g = [":write-all", ":insert-output lazygit >/dev/tty", ":redraw", ":reload-all"]
