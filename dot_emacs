@@ -62,12 +62,11 @@
   (set-face-attribute 'default nil :family "Fira Code" :height 150)
   (tool-bar-mode -1)
   (scroll-bar-mode -1)
-  (load-theme 'leuven)
 )
 
 (when (not (window-system))
       (menu-bar-mode -1)
-      (load-theme 'modus-vivendi t)) ; dark theme for terminal; matches kitty's bg
+      (load-theme 'wombat t)) ; built-in dark theme, terminal only
 
 (setq show-paren-delay 0)
 (show-paren-mode 1)
@@ -103,8 +102,9 @@
 (setq column-number-mode t)
 (setq-default frame-title-format "%b (%f)")
 
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file 'noerror)
+;; No separate custom.el: send Customize writes to the void so all config
+;; lives in this one file. (M-x customize changes won't persist.)
+(setq custom-file null-device)
 
 ;(require 'ido)
 ;(ido-mode t)
@@ -174,19 +174,23 @@
 (use-package terraform-mode
   :mode ("\\.tf\\'" "\\.tfvars\\'"))
 
-(use-package lsp-mode
-  :init
-  ;; Pin the keymap prefix so it doesn't clobber the s-l (goto-line) binding.
-  (setq lsp-keymap-prefix "C-c l")
-  :custom
-  ;; We drive completion through corfu/capf, not company; this also silences
-  ;; the "Unable to autoconfigure company-mode" warning.
-  (lsp-completion-provider :none)
-  :hook (terraform-mode . lsp-deferred)
-  :commands (lsp lsp-deferred))
+(use-package rust-mode
+  :mode "\\.rs\\'")
 
-(use-package lsp-ui
-  :commands lsp-ui-mode)
+(use-package go-mode
+  :mode "\\.go\\'")
+
+;; eglot is the builtin LSP client (Emacs 29+). Uses eldoc + flymake for
+;; docs/diagnostics, so no separate UI package is needed.
+(use-package eglot
+  :ensure nil
+  :hook ((terraform-mode . eglot-ensure)
+         (rust-mode       . eglot-ensure)
+         (go-mode         . eglot-ensure))
+  :config
+  ;; rust-analyzer and gopls are autodetected; pin terraform-ls explicitly.
+  (add-to-list 'eglot-server-programs
+               '(terraform-mode . ("terraform-ls" "serve"))))
 
 ;;
 ;; Modern in-buffer completion (corfu)
@@ -225,13 +229,6 @@
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles partial-completion)))))
-
-;; lsp-mode defaults to the `flex' style; make it use orderless too.
-(add-hook 'lsp-completion-mode-hook
-          (lambda ()
-            (setf (alist-get 'styles
-                             (alist-get 'lsp-capf completion-category-defaults))
-                  '(orderless))))
 
 (use-package magit
   :bind (("C-x g"   . magit-status)

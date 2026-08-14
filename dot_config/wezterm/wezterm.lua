@@ -6,8 +6,10 @@ local config = wezterm.config_builder()
 config.window_decorations = "RESIZE"
 
 -- Larger default window size (columns x rows)
-config.initial_cols = 160
-config.initial_rows = 45
+local initial_cols = 160
+local initial_rows = 45
+config.initial_cols = initial_cols
+config.initial_rows = initial_rows
 
 -- Appearance
 
@@ -49,6 +51,20 @@ config.scrollback_lines = 10000
 
 -- Workspace name
 -- config.default_workspace = "main"
+
+-- On GUI startup: maximize the window and run `herdr` in the shell
+-- (fires on startup only, not for each new tab; skipped when attaching to an
+-- already-running mux server)
+wezterm.on("gui-startup", function(cmd)
+	local args = cmd or {}
+	-- spawn_window doesn't inherit initial_cols/initial_rows; passing them avoids
+	-- a brief small window before maximize kicks in
+	args.width = initial_cols
+	args.height = initial_rows
+	local _, pane, window = wezterm.mux.spawn_window(args)
+	window:gui_window():maximize()
+	pane:send_text("herdr\n")
+end)
 
 -- Long-running command notifications (alert after 10 seconds)
 config.audible_bell = "Disabled"
@@ -138,48 +154,56 @@ config.visual_bell = {
 --end)
 
 -- Key bindings
---config.disable_default_key_bindings = true
+config.disable_default_key_bindings = true
+--config.keys = {
+--
+--	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
+--	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
+--	{ key = "k", mods = "CMD", action = act.ActivatePaneDirection("Up") },
+--	{ key = "j", mods = "CMD", action = act.ActivatePaneDirection("Down") },
+--
+--	{ key = "h", mods = "CMD|SHIFT", action = wezterm.action.SplitPane({ direction = "Left" }) },
+--	{ key = "l", mods = "CMD|SHIFT", action = wezterm.action.SplitPane({ direction = "Right" }) },
+--	{ key = "k", mods = "CMD|SHIFT", action = wezterm.action.SplitPane({ direction = "Up" }) },
+--	{ key = "j", mods = "CMD|SHIFT", action = wezterm.action.SplitPane({ direction = "Down" }) },
+--
+--	{ key = "h", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
+--	{ key = "l", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Right", 5 }) },
+--	{ key = "k", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Up", 5 }) },
+--	{ key = "j", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Down", 5 }) },
+--
+--	{ key = "[", mods = "CMD|SHIFT", action = act.ActivateTabRelative(-1) },
+--	{ key = "]", mods = "CMD|SHIFT", action = act.ActivateTabRelative(1) },
+--	{ key = "[", mods = "CMD|CTRL", action = act.MoveTabRelative(-1) },
+--	{ key = "]", mods = "CMD|CTRL", action = act.MoveTabRelative(1) },
+--
+--	{ key = "o", mods = "CMD", action = act.RotatePanes("Clockwise") },
+--	{ key = "i", mods = "CMD", action = act.RotatePanes("CounterClockwise") },
+--
+--	{ key = "s", mods = "CMD", action = act.PaneSelect({ mode = "SwapWithActive" }) },
+--
+--	-- Close pane (Cmd + W)
+--	--{ key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = true }) },
+--
+--	-- New tab (Cmd + T)
+--	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
+--
+--	-- Search (Cmd + F)
+--	{ key = "f", mods = "CMD", action = act.Search({ CaseInSensitiveString = "" }) },
+--
+--	-- Zoom current pane (Cmd + Z)
+--	{ key = "z", mods = "CMD", action = act.TogglePaneZoomState },
+--
+--	-- Command palette (Cmd + Shift + P)
+--	{ key = "p", mods = "CMD|SHIFT", action = act.ActivateCommandPalette },
+--}
+
+-- Quit/close without confirmation prompts
+config.window_close_confirmation = "NeverPrompt"
+
 config.keys = {
-
-	{ key = "h", mods = "CMD", action = act.ActivatePaneDirection("Left") },
-	{ key = "l", mods = "CMD", action = act.ActivatePaneDirection("Right") },
-	{ key = "k", mods = "CMD", action = act.ActivatePaneDirection("Up") },
-	{ key = "j", mods = "CMD", action = act.ActivatePaneDirection("Down") },
-
-	{ key = "h", mods = "CMD|SHIFT", action = wezterm.action.SplitPane({ direction = "Left" }) },
-	{ key = "l", mods = "CMD|SHIFT", action = wezterm.action.SplitPane({ direction = "Right" }) },
-	{ key = "k", mods = "CMD|SHIFT", action = wezterm.action.SplitPane({ direction = "Up" }) },
-	{ key = "j", mods = "CMD|SHIFT", action = wezterm.action.SplitPane({ direction = "Down" }) },
-
-	{ key = "h", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Left", 5 }) },
-	{ key = "l", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Right", 5 }) },
-	{ key = "k", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Up", 5 }) },
-	{ key = "j", mods = "CMD|CTRL", action = act.AdjustPaneSize({ "Down", 5 }) },
-
-	{ key = "[", mods = "CMD|SHIFT", action = act.ActivateTabRelative(-1) },
-	{ key = "]", mods = "CMD|SHIFT", action = act.ActivateTabRelative(1) },
-	{ key = "[", mods = "CMD|CTRL", action = act.MoveTabRelative(-1) },
-	{ key = "]", mods = "CMD|CTRL", action = act.MoveTabRelative(1) },
-
-	{ key = "o", mods = "CMD", action = act.RotatePanes("Clockwise") },
-	{ key = "i", mods = "CMD", action = act.RotatePanes("CounterClockwise") },
-
-	{ key = "s", mods = "CMD", action = act.PaneSelect({ mode = "SwapWithActive" }) },
-
-	-- Close pane (Cmd + W)
-	--{ key = "w", mods = "CMD", action = act.CloseCurrentPane({ confirm = true }) },
-
-	-- New tab (Cmd + T)
-	{ key = "t", mods = "CMD", action = act.SpawnTab("CurrentPaneDomain") },
-
-	-- Search (Cmd + F)
-	{ key = "f", mods = "CMD", action = act.Search({ CaseInSensitiveString = "" }) },
-
-	-- Zoom current pane (Cmd + Z)
-	{ key = "z", mods = "CMD", action = act.TogglePaneZoomState },
-
-	-- Command palette (Cmd + Shift + P)
-	{ key = "p", mods = "CMD|SHIFT", action = act.ActivateCommandPalette },
+	-- Quit (Cmd + Q)
+	{ key = "q", mods = "CMD", action = act.QuitApplication },
 }
 
 -- Mouse bindings - ONLY Cmd+Click opens URLs (disable default click-to-open)

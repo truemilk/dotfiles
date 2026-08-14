@@ -18,7 +18,7 @@ abbr -a gg lazygit
 abbr -a yy yazi
 abbr -a la ls -aG
 abbr -a ll ls -laG
-abbr -a tree eza --tree --level
+abbr -a tree eza --tree
 abbr --command git up pull --rebase --autostash
 abbr --command git lg log --pretty=oneline -n 20 --graph --abbrev-commit
 abbr --command git co checkout
@@ -36,4 +36,13 @@ abbr --add unset set --erase
 abbr -a L --position anywhere --set-cursor "% | less"
 abbr -a CP --position anywhere --set-cursor "% | pbcopy"
 
-set -gx HOMEBREW_NO_ENV_HINTS 1
+if type -q fzf
+    fzf --fish | source
+    set FZF_DEFAULT_OPTS "--height 40% --layout reverse --border=rounded --no-separator --info inline --preview-window down"
+    #set FZF_CTRL_R_OPTS "--bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'"
+    set FZF_CTRL_R_OPTS "--with-nth 3.. --bind 'alt-t:change-with-nth(2..|1,3..|3..)'"
+    #set FZF_CTRL_T_OPTS "--walker-skip .git,node_modules,target --preview 'bat -n --color=always {}' --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+    #set FZF_ALT_C_OPTS "--walker-skip .git,node_modules,target --preview 'eza --tree {}'"
+else
+    echo "Install fzf, please."
+end

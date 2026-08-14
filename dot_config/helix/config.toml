@@ -1,4 +1,4 @@
-theme = "ayu_dark"
+theme = "carbonfox"
 
 [editor]
 line-number = "relative"
@@ -15,6 +15,16 @@ preview-completion-insert = false
 popup-border = "all"
 jump-label-alphabet = "fjdkslaghrueiwoqptyvncmbxz"
 end-of-line-diagnostics = "hint"
+rulers = [100]
+text-width = 100
+completion-replace = true      # completion overwrites the word instead of inserting mid-word
+continue-comments = false      # no auto comment-leader on newline
+default-yank-register = "+"    # every yank goes to the system clipboard
+trim-trailing-whitespace = true
+trim-final-newlines = true
+
+[editor.auto-save]
+focus-lost = true
 
 [editor.indent-guides]
 render = true
@@ -28,8 +38,8 @@ insert = "bar"
 normal = "block"
 select = "underline"
 
-#[editor.file-picker]
-#hidden = false
+[editor.file-picker]
+hidden = false
 
 [editor.statusline]
 left = ["mode", "separator", "version-control"]
@@ -38,8 +48,6 @@ right = [
   "diagnostics",
   "workspace-diagnostics",
   "position",
-  "total-line-numbers",
-  "position-percentage",
   "file-encoding",
   "file-line-ending",
   "file-type",
@@ -52,14 +60,19 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
+# Trailing spaces are stripped on save (trim-trailing-whitespace), so rendering
+# every space is pure noise. nbsp/nnbsp stay visible: they are invisible bug sources.
 [editor.whitespace.render]
-space = "all"
+space = "none"
 tab = "all"
+nbsp = "all"
+nnbsp = "all"
 
 [editor.lsp]
 enable = true
 auto-signature-help = true
 display-messages = true
+display-progress-messages = true
 display-inlay-hints = true
 display-signature-help-docs = true
 snippets = true
@@ -68,14 +81,17 @@ goto-reference-include-declaration = true
 [keys.normal]
 C-u = ["half_page_up", "align_view_center"]
 C-d = ["half_page_down", "align_view_center"]
-C-r = [":reload"]
 
 [keys.normal.space.o]
+r = [":reload"]
 g = [":write-all", ":insert-output lazygit >/dev/tty", ":redraw", ":reload-all"]
+# Falls back to the current buffer when yazi is quit without picking a file:
+# an empty chooser file would make `:open` run with zero arguments and error.
 y = [
-  ':sh rm -f /tmp/unique-file',
-  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+  ':sh rm -f /tmp/hx-yazi-$PPID',
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/hx-yazi-$PPID',
   ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
-  ':open %sh{cat /tmp/unique-file}',
+  ':open %sh{ [ -s /tmp/hx-yazi-$PPID ] && cat /tmp/hx-yazi-$PPID || echo %{buffer_name} }',
+  ':sh rm -f /tmp/hx-yazi-$PPID',
   ':redraw',
 ]

@@ -4,12 +4,12 @@
 name = "hcl"
 language-servers = ["terraform-ls", "tflint"]
 formatter = { command = "terraform", args = ["fmt", "-"] }
-auto-format = true
 
 [[language]]
 name = "tfvars"
 language-servers = ["terraform-ls"]
 language-id = "terraform-vars"
+formatter = { command = "terraform", args = ["fmt", "-"] }
 
 [language-server.terraform-ls]
 command = "terraform-ls"
@@ -33,7 +33,6 @@ args = ["--langserver"]
 [[language]]
 name = "go"
 formatter = { command = "goimports" }
-auto-format = true
 
 [language-server.gopls.config]
 usePlaceholders = true   # fill function-signature placeholders on completion
@@ -56,16 +55,12 @@ unusedparams = true
 unusedwrite = true
 nilness = true
 useany = true
+unusedvariable = true
+shadow = true            # noisiest of the set: fires on idiomatic `if err := ...` nesting
 
 # ─────────────────────────────────── Rust ───────────────────────────────────
-[[language]]
-name = "rust"
-auto-format = true
-roots = ["Cargo.toml", "Cargo.lock"]
-
-[language-server.rust-analyzer]
-command = "rust-analyzer"
-
+# `roots` and the rust-analyzer `command` are already Helix defaults, so only
+# the server config needs overriding here.
 [language-server.rust-analyzer.config]
 check.command = "clippy"
 completion.callable.snippets = "fill_arguments"   # auto-fill args on fn completion
@@ -81,19 +76,36 @@ inlayHints.typeHints.hideClosureInitialization = false
 [[language]]
 name = "toml"
 formatter = { command = "taplo", args = ["format", "-"] }
-auto-format = true
+
+[[language]]
+name = "json"
+formatter = { command = 'prettier', args = ["--parser", "json"] }
 
 [[language]]
 name = "yaml"
 formatter = { command = 'prettier', args = ["--parser", "yaml"] }
-auto-format = true
 
+# `--prose-wrap never` makes each paragraph a single long line, so the editor
+# has to do the wrapping.
 [[language]]
 name = "markdown"
+soft-wrap.enable = true
+text-width = 100
 formatter = { command = 'prettier', args = [
   "--parser",
   "markdown",
   "--prose-wrap",
   "never",
 ] }
-auto-format = true
+
+# ────────────────────────────── YAML schemas ────────────────────────────────
+# yaml-language-server does nothing but syntax-check without schemas attached.
+[language-server.yaml-language-server.config.yaml]
+format.enable = false   # prettier owns formatting
+validate = true
+keyOrdering = false
+
+[language-server.yaml-language-server.config.yaml.schemas]
+"https://json.schemastore.org/github-workflow.json" = ".github/workflows/*.{yml,yaml}"
+"https://json.schemastore.org/github-action.json" = "action.{yml,yaml}"
+"https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json" = "docker-compose*.{yml,yaml}"

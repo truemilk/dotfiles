@@ -2,8 +2,6 @@
     excludesfile = ~/.config/git/ignore
     autocrlf = input
 
-    pager = delta
-
 [init]
     defaultbranch = main
 
@@ -25,14 +23,6 @@
     prune = true
     rebase = true
 
-[interactive]
-    diffFilter = delta --color-only
-
-[delta]
-    navigate = true  # use n and N to move between diff sections
-    dark = true      # or light = true, or omit for auto-detection
-    line-numbers = true
-
 [merge]
     conflictstyle = zdiff3
 
@@ -47,7 +37,7 @@
 
 [user]
     name = Ivan Giacomelli
-    email = ivan@nopsled.it
+	email = ivan.giacomelli@lorum.com
     signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFgidANFo/VdM+CDNgwp+xympHpbTj+iyQuzYPeu02x4
 
 [includeIf "hasconfig:remote.*.url:git@github.com:fusebank/*"]

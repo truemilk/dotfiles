@@ -1,7 +1,7 @@
 # Shell
 brew "fish"
-brew "starship"
-brew "atuin"
+#brew "starship"
+#brew "atuin"
 
 # Tools
 brew "fzf"
@@ -15,7 +15,7 @@ brew "yazi"
 
 # Dev
 brew "git"
-brew "git-delta"
+#brew "git-delta"
 brew "gh"
 brew "uv"
 brew "ruff"
