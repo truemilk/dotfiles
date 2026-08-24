@@ -14,6 +14,7 @@ else
     set -gx EDITOR vim
 end
 
+abbr -a e hx
 abbr -a gg lazygit
 abbr -a yy yazi
 abbr -a la ls -aG
