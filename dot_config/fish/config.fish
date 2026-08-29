@@ -1,6 +1,8 @@
 /opt/homebrew/bin/brew shellenv | source
 fish_add_path --move /opt/homebrew/bin /opt/homebrew/sbin
 
+set -g fish_transient_prompt 1
+
 mise activate fish | source
 fish_add_path --move /opt/homebrew/opt/mise/bin
 
@@ -8,15 +10,16 @@ fish_add_path --move ~/.cargo/bin
 fish_add_path --move ~/.local/bin
 fish_add_path --move ~/bin
 
-if type -q hx
-    set -gx EDITOR hx
+if type -q nvim
+    set -gx EDITOR nvim
 else
     set -gx EDITOR vim
 end
 
-abbr -a e hx
-abbr -a gg lazygit
-abbr -a yy yazi
+abbr -a e nvim
+abbr -a g lazygit
+abbr -a y yazi
+
 abbr -a la ls -aG
 abbr -a ll ls -laG
 abbr -a tree eza --tree

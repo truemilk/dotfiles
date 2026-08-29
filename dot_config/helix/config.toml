@@ -8,14 +8,12 @@ auto-format = true
 color-modes = true
 cursorline = true
 bufferline = "always"
-gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
 scrolloff = 10
 path-completion = true
 preview-completion-insert = false
 popup-border = "all"
-jump-label-alphabet = "fjdkslaghrueiwoqptyvncmbxz"
+jump-label-alphabet = "mcnvtowieurhgalskdjf"
 end-of-line-diagnostics = "hint"
-rulers = [100]
 text-width = 100
 completion-replace = true      # completion overwrites the word instead of inserting mid-word
 continue-comments = false      # no auto comment-leader on newline
@@ -31,7 +29,8 @@ render = true
 skip-levels = 1
 
 [editor.inline-diagnostics]
-cursor-line = "warning"
+cursor-line = "hint"
+other-lines = "disable"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -82,16 +81,21 @@ goto-reference-include-declaration = true
 C-u = ["half_page_up", "align_view_center"]
 C-d = ["half_page_down", "align_view_center"]
 
-[keys.normal.space.o]
-r = [":reload"]
-g = [":write-all", ":insert-output lazygit >/dev/tty", ":redraw", ":reload-all"]
-# Falls back to the current buffer when yazi is quit without picking a file:
-# an empty chooser file would make `:open` run with zero arguments and error.
-y = [
-  ':sh rm -f /tmp/hx-yazi-$PPID',
-  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/hx-yazi-$PPID',
-  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
-  ':open %sh{ [ -s /tmp/hx-yazi-$PPID ] && cat /tmp/hx-yazi-$PPID || echo %{buffer_name} }',
-  ':sh rm -f /tmp/hx-yazi-$PPID',
-  ':redraw',
-]
+[keys.insert]
+C-h = "move_char_left"
+C-j = "move_line_down"
+C-k = "move_line_up"
+C-l = "move_char_right"
+
+# [keys.normal.space.o]
+# g = [":write-all", ":insert-output lazygit >/dev/tty", ":redraw", ":reload-all"]
+# # Falls back to the current buffer when yazi is quit without picking a file:
+# # an empty chooser file would make `:open` run with zero arguments and error.
+# y = [
+#   ':sh rm -f /tmp/hx-yazi-$PPID',
+#   ':insert-output yazi %{buffer_name} --chooser-file=/tmp/hx-yazi-$PPID',
+#   ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+#   ':open %sh{ [ -s /tmp/hx-yazi-$PPID ] && cat /tmp/hx-yazi-$PPID || echo %{buffer_name} }',
+#   ':sh rm -f /tmp/hx-yazi-$PPID',
+#   ':redraw',
+# ]
