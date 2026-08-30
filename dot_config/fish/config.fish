@@ -16,7 +16,8 @@ else
     set -gx EDITOR vim
 end
 
-abbr -a e nvim
+abbr -a v nvim
+abbr -a e emacs
 abbr -a g lazygit
 abbr -a y yazi
 

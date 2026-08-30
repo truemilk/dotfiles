@@ -1,5 +1,10 @@
 ;;; init.el --- Small, terminal-friendly Emacs configuration -*- lexical-binding: t; -*-
 
+;; Collect no garbage while starting up; restore a sane threshold afterwards.
+(setq gc-cons-threshold most-positive-fixnum)
+(add-hook 'emacs-startup-hook
+          (lambda () (setq gc-cons-threshold (* 32 1024 1024))))
+
 ;; Keep the terminal uncluttered and avoid unnecessary redisplay work.
 (setq inhibit-startup-screen t
       inhibit-startup-message t
@@ -10,7 +15,14 @@
       redisplay-skip-fontification-on-input t
       fast-but-imprecise-scrolling t
       scroll-conservatively 101
-      mouse-wheel-progressive-speed nil)
+      mouse-wheel-progressive-speed nil
+      ;; Frames are sized by the window manager, not by mode or font changes.
+      frame-inhibit-implied-resize t
+      ;; Nerd Font glyph coverage is large; keep its cache resident.
+      inhibit-compacting-font-caches t
+      ;; This configuration never displays right-to-left text.
+      bidi-inhibit-bpa t)
+(setq-default bidi-paragraph-direction 'left-to-right)
 
 (menu-bar-mode -1)
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
@@ -21,11 +33,47 @@
 (when (not (display-graphic-p))
   (xterm-mouse-mode 1)
   (setq frame-title-format nil))
+
+;; Native macOS frames should contain only the editor and essential status UI.
+(defun my/macos-gui-frame-setup (&optional frame)
+  "Apply minimal macOS GUI settings to FRAME."
+  (let ((frame (or frame (selected-frame))))
+    (when (and (eq system-type 'darwin) (display-graphic-p frame))
+      (dolist (parameter '((fullscreen . maximized)
+                           (font . "MesloLGS Nerd Font Mono-15")
+                           ;; Let the title bar take the frame background colour.
+                           (ns-transparent-titlebar . t)
+                           (ns-appearance . dark)
+                           (menu-bar-lines . 0)
+                           (tool-bar-lines . 0)
+                           (vertical-scroll-bars . nil)
+                           (left-fringe . 0)
+                           (right-fringe . 0)))
+        (set-frame-parameter frame (car parameter) (cdr parameter)))
+      (tooltip-mode -1)
+      (setq select-enable-clipboard t))))
+
+(when (eq system-type 'darwin)
+  ;; Command is Super; Option supplies the Meta key used by Emacs commands.
+  (setq ns-command-modifier 'super
+        ns-option-modifier 'meta)
+  (dolist (parameter '((fullscreen . maximized)
+                       (font . "MesloLGS Nerd Font Mono-15")
+                       ;; Let the title bar take the frame background colour.
+                       (ns-transparent-titlebar . t)
+                       (ns-appearance . dark)
+                       (menu-bar-lines . 0)
+                       (tool-bar-lines . 0)
+                       (vertical-scroll-bars . nil)
+                       (left-fringe . 0)
+                       (right-fringe . 0)))
+    (setf (alist-get (car parameter) default-frame-alist)
+          (cdr parameter)))
+  (add-hook 'after-make-frame-functions #'my/macos-gui-frame-setup)
+  (my/macos-gui-frame-setup))
+
 (setq-default cursor-type 'bar)
 (set-language-environment "UTF-8")
-
-;; A readable built-in theme that works well with 256-colour terminals.
-(load-theme 'wombat t)
 
 ;; Lightweight minibuffer completion; no external packages required.
 (fido-vertical-mode 1)
@@ -36,6 +84,7 @@
 
 ;; Useful defaults without expensive global visual features.
 (column-number-mode 1)
+(setq auto-revert-avoid-polling t)
 (global-auto-revert-mode 1)
 (delete-selection-mode 1)
 (savehist-mode 1)
@@ -59,7 +108,17 @@
       create-lockfiles nil)
 
 ;; Keep third-party package management separate from the core configuration.
-(load (expand-file-name "packages.el" user-emacs-directory))
+;; Load the byte-compiled form, recompiling it whenever the source is newer.
+(let* ((source (expand-file-name "packages.el" user-emacs-directory))
+       (compiled (concat source "c")))
+  (when (file-newer-than-file-p source compiled)
+    (require 'bytecomp)
+    (byte-compile-file source))
+  (load (file-name-sans-extension source) nil 'nomessage))
+
+;; Tokyo Night everywhere; fall back to Wombat if the package is unavailable.
+(unless (ignore-errors (load-theme 'tokyo-night t) t)
+  (load-theme 'wombat t))
 
 ;; Put Customize output in its own file instead of appending to this one.
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
