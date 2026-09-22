@@ -26,6 +26,12 @@ prefillRequiredFields = true
 [language-server.tflint]
 command = "tflint"
 args = ["--langserver"]
+# The aws ruleset (deep_check in .tflint.hcl) resolves AWS credentials on every
+# check. With no creds in the environment the SDK falls through to EC2 IMDS
+# (169.254.169.254), which blackholes on a laptop: ~4s per attempt. tflint's
+# jsonrpc handler is serialized, so it cannot answer `shutdown` while blocked
+# and helix's 3s shutdown wait expires -> quitting hangs. Fail creds fast.
+environment = { AWS_EC2_METADATA_DISABLED = "true" }
 
 # ──────────────────────────────────── Go ────────────────────────────────────
 # goimports stays the formatter: it runs gofmt *and* organizes imports on save

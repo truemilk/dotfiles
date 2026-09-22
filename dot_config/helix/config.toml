@@ -1,4 +1,4 @@
-theme = "tokyonight"
+theme = "carbonfox"
 
 [editor]
 line-number = "relative"
@@ -86,16 +86,4 @@ C-h = "move_char_left"
 C-j = "move_line_down"
 C-k = "move_line_up"
 C-l = "move_char_right"
-
-# [keys.normal.space.o]
-# g = [":write-all", ":insert-output lazygit >/dev/tty", ":redraw", ":reload-all"]
-# # Falls back to the current buffer when yazi is quit without picking a file:
-# # an empty chooser file would make `:open` run with zero arguments and error.
-# y = [
-#   ':sh rm -f /tmp/hx-yazi-$PPID',
-#   ':insert-output yazi %{buffer_name} --chooser-file=/tmp/hx-yazi-$PPID',
-#   ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
-#   ':open %sh{ [ -s /tmp/hx-yazi-$PPID ] && cat /tmp/hx-yazi-$PPID || echo %{buffer_name} }',
-#   ':sh rm -f /tmp/hx-yazi-$PPID',
-#   ':redraw',
-# ]
+C-c = "normal_mode"
