@@ -1,5 +1,3 @@
-# ───────────────────────────── Terraform / HCL ──────────────────────────────
-# .tf files are detected as `hcl`; .tfvars as `tfvars`. Both share terraform-ls.
 [[language]]
 name = "hcl"
 language-servers = ["terraform-ls", "tflint"]
@@ -7,45 +5,26 @@ formatter = { command = "terraform", args = ["fmt", "-"] }
 
 [[language]]
 name = "tfvars"
-language-servers = ["terraform-ls"]
-language-id = "terraform-vars"
 formatter = { command = "terraform", args = ["fmt", "-"] }
 
-[language-server.terraform-ls]
-command = "terraform-ls"
-args = ["serve"]
-
-# Run `terraform validate` on save and prefill required arguments in completion.
 [language-server.terraform-ls.config.experimentalFeatures]
 validateOnSave = true
 prefillRequiredFields = true
 
-# tflint as a second LSP -> inline lint diagnostics.
-# Core rules work out of the box; run `tflint --init` in a project to enable
-# provider/ruleset plugins. Comment this out (and drop "tflint" above) if noisy.
 [language-server.tflint]
 command = "tflint"
 args = ["--langserver"]
-# The aws ruleset (deep_check in .tflint.hcl) resolves AWS credentials on every
-# check. With no creds in the environment the SDK falls through to EC2 IMDS
-# (169.254.169.254), which blackholes on a laptop: ~4s per attempt. tflint's
-# jsonrpc handler is serialized, so it cannot answer `shutdown` while blocked
-# and helix's 3s shutdown wait expires -> quitting hangs. Fail creds fast.
 environment = { AWS_EC2_METADATA_DISABLED = "true" }
 
-# ──────────────────────────────────── Go ────────────────────────────────────
-# goimports stays the formatter: it runs gofmt *and* organizes imports on save
-# (gopls' LSP formatting alone does not reorganize imports).
 [[language]]
 name = "go"
+language-servers = ["gopls"]
 formatter = { command = "goimports" }
 
 [language-server.gopls.config]
-usePlaceholders = true   # fill function-signature placeholders on completion
-staticcheck = true       # bundled staticcheck analysis suite (no extra binary)
+usePlaceholders = true
+staticcheck = true
 
-# Inlay hints — gopls emits none unless explicitly enabled, so the global
-# `display-inlay-hints = true` was a no-op for Go until now.
 [language-server.gopls.config.hints]
 assignVariableTypes = true
 compositeLiteralFields = true
@@ -55,33 +34,13 @@ functionTypeParameters = true
 parameterNames = true
 rangeVariableTypes = true
 
-# High-signal, low-noise static analyses beyond the defaults.
-[language-server.gopls.config.analyses]
-unusedparams = true
-unusedwrite = true
-nilness = true
-useany = true
-unusedvariable = true
-shadow = true            # noisiest of the set: fires on idiomatic `if err := ...` nesting
-
-# ─────────────────────────────────── Rust ───────────────────────────────────
-# `roots` and the rust-analyzer `command` are already Helix defaults, so only
-# the server config needs overriding here.
 [language-server.rust-analyzer.config]
 check.command = "clippy"
-completion.callable.snippets = "fill_arguments"   # auto-fill args on fn completion
-inlayHints.bindingModeHints.enable = false
 inlayHints.closingBraceHints.minLines = 10
 inlayHints.closureCaptureHints.enable = true
 inlayHints.closureReturnTypeHints.enable = "with_block"
 inlayHints.discriminantHints.enable = "fieldless"
 inlayHints.lifetimeElisionHints.enable = "skip_trivial"
-inlayHints.typeHints.hideClosureInitialization = false
-
-# ───────────────────────────── Other formatters ─────────────────────────────
-[[language]]
-name = "toml"
-formatter = { command = "taplo", args = ["format", "-"] }
 
 [[language]]
 name = "json"
@@ -91,12 +50,9 @@ formatter = { command = 'prettier', args = ["--parser", "json"] }
 name = "yaml"
 formatter = { command = 'prettier', args = ["--parser", "yaml"] }
 
-# `--prose-wrap never` makes each paragraph a single long line, so the editor
-# has to do the wrapping.
 [[language]]
 name = "markdown"
 soft-wrap.enable = true
-text-width = 100
 formatter = { command = 'prettier', args = [
   "--parser",
   "markdown",
@@ -104,14 +60,5 @@ formatter = { command = 'prettier', args = [
   "never",
 ] }
 
-# ────────────────────────────── YAML schemas ────────────────────────────────
-# yaml-language-server does nothing but syntax-check without schemas attached.
 [language-server.yaml-language-server.config.yaml]
 format.enable = false   # prettier owns formatting
-validate = true
-keyOrdering = false
-
-[language-server.yaml-language-server.config.yaml.schemas]
-"https://json.schemastore.org/github-workflow.json" = ".github/workflows/*.{yml,yaml}"
-"https://json.schemastore.org/github-action.json" = "action.{yml,yaml}"
-"https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json" = "docker-compose*.{yml,yaml}"

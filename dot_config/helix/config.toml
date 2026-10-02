@@ -2,27 +2,24 @@ theme = "carbonfox"
 
 [editor]
 line-number = "relative"
-mouse = true
-auto-completion = true
-auto-format = true
 color-modes = true
 cursorline = true
 bufferline = "always"
 scrolloff = 10
-path-completion = true
 preview-completion-insert = false
 popup-border = "all"
 jump-label-alphabet = "mcnvtowieurhgalskdjf"
 end-of-line-diagnostics = "hint"
 text-width = 100
-completion-replace = true      # completion overwrites the word instead of inserting mid-word
-continue-comments = false      # no auto comment-leader on newline
-default-yank-register = "+"    # every yank goes to the system clipboard
+completion-replace = true
+continue-comments = false
+default-yank-register = "+"
 trim-trailing-whitespace = true
 trim-final-newlines = true
 
 [editor.auto-save]
 focus-lost = true
+after-delay.enable = true
 
 [editor.indent-guides]
 render = true
@@ -30,11 +27,9 @@ skip-levels = 1
 
 [editor.inline-diagnostics]
 cursor-line = "hint"
-other-lines = "disable"
 
 [editor.cursor-shape]
 insert = "bar"
-normal = "block"
 select = "underline"
 
 [editor.file-picker]
@@ -45,10 +40,7 @@ left = ["mode", "separator", "version-control"]
 center = ["file-name", "read-only-indicator", "file-modification-indicator"]
 right = [
   "diagnostics",
-  "workspace-diagnostics",
   "position",
-  "file-encoding",
-  "file-line-ending",
   "file-type",
   "register",
   "selections",
@@ -59,31 +51,11 @@ mode.normal = "NORMAL"
 mode.insert = "INSERT"
 mode.select = "SELECT"
 
-# Trailing spaces are stripped on save (trim-trailing-whitespace), so rendering
-# every space is pure noise. nbsp/nnbsp stay visible: they are invisible bug sources.
 [editor.whitespace.render]
-space = "none"
 tab = "all"
 nbsp = "all"
 nnbsp = "all"
 
 [editor.lsp]
-enable = true
-auto-signature-help = true
-display-messages = true
 display-progress-messages = true
 display-inlay-hints = true
-display-signature-help-docs = true
-snippets = true
-goto-reference-include-declaration = true
-
-[keys.normal]
-C-u = ["half_page_up", "align_view_center"]
-C-d = ["half_page_down", "align_view_center"]
-
-[keys.insert]
-C-h = "move_char_left"
-C-j = "move_line_down"
-C-k = "move_line_up"
-C-l = "move_char_right"
-C-c = "normal_mode"

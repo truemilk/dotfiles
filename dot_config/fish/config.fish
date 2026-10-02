@@ -29,13 +29,15 @@ else
     echo "Install fzf, please."
 end
 
-if type -q nvim
-    set -gx EDITOR nvim
+if type -q hx
+    set -gx EDITOR hx
 else
     set -gx EDITOR vim
 end
 
 abbr -a e $EDITOR
+
+abbr -a cd z
 
 abbr -a g lazygit
 abbr -a y yazi
