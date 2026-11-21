@@ -55,6 +55,8 @@ if status is-interactive
     abbr -a ll lsd -Alg
     abbr -a tree lsd --tree
 
+    abbr -a a 'abduco -e ^q -c'
+
     abbr --command git up pull --rebase --autostash
     abbr --command git lg log --pretty=oneline -n 20 --graph --abbrev-commit
     abbr --command git co checkout
