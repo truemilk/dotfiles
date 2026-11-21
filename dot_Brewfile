@@ -1,5 +1,7 @@
 # Shell
 brew "fish"
+brew "zsh"
+brew "zsh-patina"
 
 # Tools
 brew "fzf"

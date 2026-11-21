@@ -1,8 +1,23 @@
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+typeset -U path fpath
+
+if [[ -x /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif (( $+commands[brew] )); then
+    eval "$(brew shellenv)"
+fi
+if (( $+commands[mise] )); then
+    eval "$(mise activate zsh)"
 fi
 
-typeset -U path fpath
+if [[ -n $HOMEBREW_PREFIX ]]; then
+    FPATH=$HOMEBREW_PREFIX/share/zsh-completions:$FPATH
+fi
+export HOMEBREW_NO_ENV_HINTS=1
+
+[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
+[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
+[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
 
 export HISTFILE="${ZDOTDIR:-$HOME}/.zsh_history"
 export HISTSIZE=100000
@@ -25,12 +40,9 @@ setopt autocd
 export CLICOLOR=1
 
 alias l="lsd"
-alias ls="lsd"
 alias la="lsd -A"
 alias ll="lsd -Alg"
-alias tree="lsd --tree"
-
-alias cd='z'
+alias lt="lsd --tree"
 
 alias -g CP="| pbcopy"
 alias -g RG="| rg"
@@ -65,25 +77,6 @@ my-backward-delete-word() {
 zle -N my-backward-delete-word
 bindkey '^W' my-backward-delete-word
 
-if [[ -x /opt/homebrew/bin/brew ]]; then
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-elif (( $+commands[brew] )); then
-    eval "$(brew shellenv)"
-fi
-if (( $+commands[mise] )); then
-    eval "$(mise activate zsh)"
-fi
-
-if [[ -n $HOMEBREW_PREFIX ]]; then
-    FPATH=$HOMEBREW_PREFIX/share/zsh-completions:$FPATH
-fi
-export HOMEBREW_NO_ENV_HINTS=1
-
-[[ -r "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
-
-[[ -d "$HOME/.local/bin" ]] && export PATH="$HOME/.local/bin:$PATH"
-[[ -d "$HOME/bin" ]] && export PATH="$HOME/bin:$PATH"
-
 if [[ -d "$HOME/.zextras" ]]; then
     if [[ -d "$HOME/.zextras/functions" ]]; then
         fpath=("$HOME/.zextras/functions" $fpath)
@@ -94,6 +87,17 @@ if [[ -d "$HOME/.zextras" ]]; then
     done
     unset _zextra
 fi
+
+autoload -Uz compinit
+() {
+    local dump=${ZDOTDIR:-$HOME}/.zcompdump
+    local -a stale=( $dump(N.mh+24) )
+    if (( $#stale )); then
+        compinit -d $dump && touch $dump
+    else
+        compinit -C -d $dump
+    fi
+}
 
 if (( $+commands[fzf] )); then
     eval "$(fzf --zsh)"
@@ -115,49 +119,4 @@ fi
 
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
-antidote_dir=${ZDOTDIR:-$HOME}/.antidote
-zsh_plugins=${ZDOTDIR:-$HOME}/.zsh_plugins
-
-if [[ ! -d $antidote_dir ]]; then
-    if (( $+commands[git] )); then
-        echo 'Installing antidote...'
-        git clone --depth=1 https://github.com/mattmc3/antidote.git $antidote_dir
-    else
-        echo 'antidote: git not found, skipping plugin setup' >&2
-    fi
-fi
-
-if [[ -d $antidote_dir && ! -f ${zsh_plugins}.txt ]]; then
-    echo "antidote: no ${zsh_plugins}.txt, no plugins loaded" >&2
-    echo "antidote: create it with one plugin per line, e.g. zsh-users/zsh-autosuggestions" >&2
-fi
-
-if [[ -d $antidote_dir && -f ${zsh_plugins}.txt ]]; then
-    zstyle ':antidote:bundle' use-friendly-names 'yes'
-
-    fpath=($antidote_dir/functions $fpath)
-    autoload -Uz antidote
-
-    if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-        antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
-    fi
-
-    source ${zsh_plugins}.zsh
-fi
-
-unset antidote_dir zsh_plugins
-
-autoload -Uz compinit
-() {
-    local dump=${ZDOTDIR:-$HOME}/.zcompdump
-    local -a stale=( $dump(N.mh+24) )
-    if (( $#stale )); then
-        compinit -d $dump
-    else
-        compinit -C -d $dump
-    fi
-}
-
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
