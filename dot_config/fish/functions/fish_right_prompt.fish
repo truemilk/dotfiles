@@ -10,7 +10,14 @@ function fish_right_prompt
     # --- Chezmoi indicator ---
     # Once you visit the chezmoi source dir during this shell session,
     # the marker stays on until the shell exits.
-    if test "$PWD" = (chezmoi source-path 2>/dev/null)
+    # Source path looked up once per shell: ~18 ms per call, and it doesn't change
+    # during a session.
+    if not set -q __chezmoi_source
+        set -g __chezmoi_source ""
+        command -q chezmoi
+        and set __chezmoi_source "$(chezmoi source-path 2>/dev/null)"
+    end
+    if test -n "$__chezmoi_source"; and test "$PWD" = "$__chezmoi_source"
         set -g __in_chezmoi 1
     end
     if set -q __in_chezmoi
