@@ -1,30 +1,12 @@
-# Static copy of `brew shellenv fish` (saves ~37 ms per shell, which every `fish -c` pays).
-# Re-check against `brew shellenv fish` after major Homebrew updates.
-if test -x /opt/homebrew/bin/brew
-    set -gx HOMEBREW_PREFIX /opt/homebrew
-    set -gx HOMEBREW_CELLAR /opt/homebrew/Cellar
-    set -gx HOMEBREW_REPOSITORY /opt/homebrew
-    fish_add_path --global --move --path /opt/homebrew/bin /opt/homebrew/sbin
-    if test -n "$MANPATH"
-        set -gx MANPATH (string replace --regex '^:*(.*?):*$' ':$1' -- "$MANPATH")
-    end
-    if not set -q INFOPATH
-        set -g INFOPATH ''
-    end
-    set -gx INFOPATH /opt/homebrew/share/info $INFOPATH
-end
-
-# mise is activated in conf.d/mise-activate.fish
-
-# --path edits PATH directly (no universal fish_user_paths);
-# missing dirs are skipped, so no existence checks needed.
-fish_add_path --move --path ~/bin ~/.local/bin ~/.cargo/bin
+# PATH (Homebrew, ~/bin, ...) is set in conf.d/00-path.fish and mise is activated in
+# conf.d/mise-activate.fish. Both run before this file, in that order, so mise's tools win.
 
 if type -q nvim
     set -gx EDITOR nvim
 else
     set -gx EDITOR vim
 end
+
 
 # Everything below only matters at a prompt. Non-interactive shells (fish -c, and fzf
 # previews, which run through $SHELL -c) skip it.
@@ -53,7 +35,7 @@ if status is-interactive
     abbr -a l lsd
     abbr -a la lsd -A
     abbr -a ll lsd -Alg
-    abbr -a tree lsd --tree
+    abbr -a lt lsd --tree
 
     abbr -a a 'abduco -e ^q -c'
 

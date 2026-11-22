@@ -1,7 +1,7 @@
 # Shell
-brew "fish"
 brew "zsh"
-brew "zsh-patina"
+brew "fish"
+brew "starship"
 
 # Tools
 brew "fzf"

@@ -1,6 +1,7 @@
 # Same name as Homebrew's /opt/homebrew/share/fish/vendor_conf.d/mise-activate.fish, so
 # fish sources this file instead of that one and mise is activated exactly once.
-# conf.d runs before config.fish, so brew isn't on PATH yet: hence the absolute path.
+# Must sort after 00-path.fish: mise prepends its paths, so whatever runs later and moves
+# brew/~/bin to the front would shadow mise's tools. Absolute path: no PATH lookup needed.
 set -l mise /opt/homebrew/opt/mise/bin/mise
 if test -x $mise
     if status is-interactive
