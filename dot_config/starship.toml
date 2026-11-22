@@ -15,19 +15,23 @@ $character"""
 # ── Git ──────────────────────────────────────────────────────────────
 [git_branch]
 #always_show_remote = true
-symbol = 'git:'
+symbol = ''
+style = 'purple'
 format = '[$symbol$branch(:$remote_branch)]($style) '
 
 [git_commit]
 commit_hash_length = 7
 only_detached = false   # always show the commit hash, not just when detached
 tag_disabled = false    # show tags pointing at HEAD
+style = 'green'
 format = '[\($hash$tag\)]($style) '
 
 [git_state]
+style = 'yellow'
 format = '\([$state( $progress_current/$progress_total)]($style)\) '
 
 [git_status]
+style = 'red'
 format = '([\[$all_status$ahead_behind\]]($style) )'
 ahead = '⇡${count}'
 behind = '⇣${count}'
@@ -42,15 +46,16 @@ deleted = '✘${count}'
 
 [git_metrics]
 disabled = false
-added_style = 'bold blue'
-deleted_style = 'bold red'
+added_style = 'blue'
+deleted_style = 'red'
 format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
 
 # ── AWS ──────────────────────────────────────────────────────────────
 [aws]
 disabled = false
 force_display = true    # show even without active credentials in env
-symbol = 'aws:'
+symbol = ''
+style = 'yellow'
 format = '[$symbol($profile)(\($region\) )(\[$duration\] )]($style)'
 
 # ── Directory (kept so the prompt still shows where you are) ───────────

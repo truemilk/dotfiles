@@ -1,8 +1,8 @@
 # PATH (Homebrew, ~/bin, ...) is set in conf.d/00-path.fish and mise is activated in
 # conf.d/mise-activate.fish. Both run before this file, in that order, so mise's tools win.
 
-if type -q nvim
-    set -gx EDITOR nvim
+if type -q hx
+    set -gx EDITOR hx
 else
     set -gx EDITOR vim
 end
@@ -57,4 +57,6 @@ if status is-interactive
     abbr -a CP --position anywhere --set-cursor "% | pbcopy"
 
     set -g fish_transient_prompt 1
+
+    starship init fish | source
 end
