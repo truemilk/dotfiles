@@ -48,7 +48,7 @@ deleted = '✘${count}'
 disabled = false
 added_style = 'blue'
 deleted_style = 'red'
-format = '[+$added]($added_style)/[-$deleted]($deleted_style) '
+format = '([+$added]($added_style) )([-$deleted]($deleted_style) )'
 
 # ── AWS ──────────────────────────────────────────────────────────────
 [aws]
@@ -60,6 +60,7 @@ format = '[$symbol($profile)(\($region\) )(\[$duration\] )]($style)'
 
 # ── Directory (kept so the prompt still shows where you are) ───────────
 [directory]
+style = 'blue'
 truncation_length = 3
 truncation_symbol = ".../"
 truncate_to_repo = true
