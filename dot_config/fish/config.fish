@@ -1,12 +1,11 @@
-# PATH (Homebrew, ~/bin, ...) is set in conf.d/00-path.fish and mise is activated in
-# conf.d/mise-activate.fish. Both run before this file, in that order, so mise's tools win.
+# PATH and mise activation live in conf.d/00-path.fish, which runs before this file.
+# Order: ~/bin → ~/.local/bin → mise → ~/.cargo/bin → Homebrew → system.
 
-if type -q hx
-    set -gx EDITOR hx
+if type -q nvim
+    set -gx EDITOR nvim
 else
     set -gx EDITOR vim
 end
-
 
 # Everything below only matters at a prompt. Non-interactive shells (fish -c, and fzf
 # previews, which run through $SHELL -c) skip it.
@@ -31,6 +30,7 @@ if status is-interactive
 
     abbr -a g lazygit
     abbr -a y yazi
+    abbr -a c claude
 
     abbr -a l lsd
     abbr -a la lsd -A
@@ -60,3 +60,5 @@ if status is-interactive
 
     starship init fish | source
 end
+
+eval (/opt/homebrew/bin/brew shellenv fish)
