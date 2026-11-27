@@ -53,30 +53,30 @@
 [commit]
     gpgsign = true
 
-[alias]
-    alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /|sort
-
-    br = branch -vv --format='%(HEAD) %(if)%(upstream)%(then)%(color:bold green)%(else)%(if)%(push)%(then)%(color:bold yellow)%(else)%(color:red)%(end)%(end)%(refname:short)%(color:reset) - %(contents:subject) %(color:magenta)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
-    df = !git diff --word-diff=color
-
-    #count = rev-list --count HEAD
-    #countall = rev-list --count --all
-    #firstcommit = rev-list --max-parents=0 HEAD
-
-    cleanup-branches = "!f() { echo \"Fetching and pruning...\"; git fetch --all --prune; branches=$(git branch -vv | grep \": gone]\" | awk \"{print \\$1}\"); if [ -n \"$branches\" ]; then echo \"Branches to delete:\"; echo \"$branches\"; read -p \"Delete these branches? (y/N) \" -n 1 -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then echo \"$branches\" | xargs git branch -D; else echo \"Cancelled.\"; fi; else echo \"No branches to delete.\"; fi; }; f"
-
-    wtl = worktree list
-    wta = worktree add
-    wtr = worktree remove
-    wtp = worktree prune
-
-    done = !git push -u origin HEAD
-    undos = reset --soft HEAD~1
-    undom = reset --mixed HEAD~1
-
-    co = checkout
-    com = checkout main
-    cob = checkout -b
-
-    up = pull --rebase --autostash
-    lg = log --pretty=oneline -n 20 --graph --abbrev-commit
+#[alias]
+#    alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /|sort
+#
+#    br = branch -vv --format='%(HEAD) %(if)%(upstream)%(then)%(color:bold green)%(else)%(if)%(push)%(then)%(color:bold yellow)%(else)%(color:red)%(end)%(end)%(refname:short)%(color:reset) - %(contents:subject) %(color:magenta)(%(committerdate:relative)) [%(authorname)]' --sort=-committerdate
+#    df = !git diff --word-diff=color
+#
+#    #count = rev-list --count HEAD
+#    #countall = rev-list --count --all
+#    #firstcommit = rev-list --max-parents=0 HEAD
+#
+#    cleanup-branches = "!f() { echo \"Fetching and pruning...\"; git fetch --all --prune; branches=$(git branch -vv | grep \": gone]\" | awk \"{print \\$1}\"); if [ -n \"$branches\" ]; then echo \"Branches to delete:\"; echo \"$branches\"; read -p \"Delete these branches? (y/N) \" -n 1 -r; echo; if [[ $REPLY =~ ^[Yy]$ ]]; then echo \"$branches\" | xargs git branch -D; else echo \"Cancelled.\"; fi; else echo \"No branches to delete.\"; fi; }; f"
+#
+#    wtl = worktree list
+#    wta = worktree add
+#    wtr = worktree remove
+#    wtp = worktree prune
+#
+#    done = !git push -u origin HEAD
+#    undos = reset --soft HEAD~1
+#    undom = reset --mixed HEAD~1
+#
+#    co = checkout
+#    com = checkout main
+#    cob = checkout -b
+#
+#    up = pull --rebase --autostash
+#    lg = log --pretty=oneline -n 20 --graph --abbrev-commit
